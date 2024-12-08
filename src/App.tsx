@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import PuzzlePage from "./views/PuzzlePage/PuzzlePage";
 import AboutPage from "./views/AboutPage/AboutPage";
 import ContributePage from "./views/ContributePage/ContributePage";
@@ -7,7 +7,7 @@ import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="app">
         <nav className="nav-container">
           <div className="nav-left">
@@ -32,7 +32,7 @@ const App: React.FC = () => {
           </Routes>
         </main>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
