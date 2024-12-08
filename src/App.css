@@ -1,0 +1,171 @@
+:root {
+  --primary-color: #36393f;
+  --secondary-color: #2f3136;
+  --tertiary-color: #202225;
+  --text-color: #dcddde;
+  --muted-color: #72767d;
+  --link-color: #00b0f4;
+  --green-color: #43b581;
+  --red-color: #f04747;
+  --button-color: #4f545c;
+  --button-hover-color: #686d73;
+  --board-size: 380px;
+  --puzzle-container-padding: 1rem;
+}
+
+body {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.nav-container {
+  background: var(--tertiary-color);
+  padding: 0 1rem;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--muted-color);
+  margin: 0 0.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.logo a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--puzzle-container-padding);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-container {
+    justify-content: center;
+  }
+}
+.logo-beta-badge {
+  cursor: default;
+  background-color: #ff6b6b;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
+}
+
+.logo-beta-badge::after {
+  content: "OH";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  opacity: 0.1;
+  filter: blur(3px);
+  animation: rotate 10s linear infinite;
+}
+
+.logo-beta-badge span {
+  position: relative;
+  z-index: 1;
+}
+
+.logo-beta-badge:hover {
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.9);
+  background-color: #ff4f4f;
+}
+
+.logo-beta-badge:hover::after {
+  opacity: 0.2;
+  filter: blur(2px);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-5px) rotate(3deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -50%;
+  }
+  100% {
+    left: 150%;
+  }
+}

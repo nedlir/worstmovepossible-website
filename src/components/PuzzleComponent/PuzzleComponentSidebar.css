@@ -1,0 +1,58 @@
+.puzzle-sidebar {
+  background: var(--secondary-color);
+  border-radius: 8px;
+  padding: var(--puzzle-container-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.puzzle-info h3 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.puzzle-stats {
+  color: var(--muted-color);
+  font-size: 0.9rem;
+}
+
+.puzzle-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.control-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--button-color);
+  border: none;
+  border-radius: 4px;
+  color: var(--text-color);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.control-button:hover {
+  background: var(--button-hover-color);
+}
+
+.control-button svg {
+  fill: currentColor;
+}
+
+@media (max-width: 768px) {
+  .puzzle-sidebar {
+    order: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .puzzle-controls {
+    flex-wrap: wrap;
+  }
+}

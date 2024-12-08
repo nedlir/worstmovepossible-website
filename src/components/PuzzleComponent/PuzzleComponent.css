@@ -1,0 +1,13 @@
+.puzzle-container {
+  display: grid;
+  grid-template-columns: minmax(200px, 240px) 1fr;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+  .puzzle-container {
+    grid-template-columns: 1fr;
+  }
+}
