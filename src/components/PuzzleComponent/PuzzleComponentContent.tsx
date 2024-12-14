@@ -5,7 +5,6 @@ import { Chess } from "chess.js";
 import { Puzzle } from "../../Puzzle";
 import SolutionMessage from "../SolutionMessage/SolutionMessage";
 import PuzzleActions from "./PuzzleActions";
-import "./PuzzleComponentContent.css";
 
 type PuzzleComponentContentProps = {
   currentPuzzle: Puzzle;
@@ -33,20 +32,16 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
 
   const playSequence = async () => {
     if (isPlayingSequence) return;
-
     let isMounted = true;
     setIsPlayingSequence(true);
     setShowingSequence(true);
-
     const game = new Chess(currentPuzzle.fen);
     if (isMounted) setSequenceGame(game);
-
     try {
       const moves = [
         ...(currentPuzzle.moves || []),
         ...(currentPuzzle.move_sequence || []),
       ];
-
       for (const move of moves) {
         if (!isMounted) break;
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -62,7 +57,6 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
         setIsPlayingSequence(false);
       }
     }
-
     return () => {
       isMounted = false;
     };
@@ -109,13 +103,11 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
             <ChessPuzzle.Board />
           )}
         </div>
-
         <PuzzleActions
           sequenceState={sequenceState}
           handlers={handlers}
           isSolved={isSolved}
         />
-
         {isSolved && (
           <SolutionMessage description={currentPuzzle.description} />
         )}

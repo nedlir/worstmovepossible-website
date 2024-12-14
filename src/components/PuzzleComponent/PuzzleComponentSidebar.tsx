@@ -1,13 +1,22 @@
 import React from "react";
 import { Puzzle } from "../../Puzzle";
 import { PreviousIcon, NextIcon } from "../../assets/Icons";
-import "./PuzzleComponentSidebar.css";
 
 type PuzzleComponentSidebarProps = {
   currentPuzzle: Puzzle;
   attempts: number;
   onPrevious: () => void;
   onNext: () => void;
+  sequenceState: {
+    isPlaying: boolean;
+    isShowing: boolean;
+    hasSequence: boolean;
+  };
+  handlers: {
+    onReset: () => void;
+    onPlaySequence: () => void;
+  };
+  isSolved: boolean;
 };
 
 const PuzzleComponentSidebar: React.FC<PuzzleComponentSidebarProps> = ({

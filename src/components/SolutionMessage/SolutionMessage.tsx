@@ -1,5 +1,4 @@
 import React from "react";
-import "./SolutionMessage.css";
 
 type SolutionMessageProps = {
   description: string;

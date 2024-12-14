@@ -4,6 +4,7 @@ import PuzzlePage from "./views/PuzzlePage/PuzzlePage";
 import AboutPage from "./views/AboutPage/AboutPage";
 import ContributePage from "./views/ContributePage/ContributePage";
 import "./App.css";
+import "./Components.css";
 
 const App: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
