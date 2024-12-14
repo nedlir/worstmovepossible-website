@@ -3,7 +3,6 @@ import { ChessPuzzle } from "@react-chess-tools/react-chess-puzzle";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { Puzzle } from "../../Puzzle";
-import SolutionMessage from "../SolutionMessage/SolutionMessage";
 import PuzzleActions from "./PuzzleActions";
 
 type PuzzleComponentContentProps = {
@@ -25,41 +24,24 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
   const [sequenceGame, setSequenceGame] = useState<Chess | null>(null);
   const [showingSequence, setShowingSequence] = useState(false);
 
-  const shouldFlipBoard = (fen: string): boolean => {
-    const fenParts = fen.split(" ");
-    return fenParts[1] === "b";
-  };
+  const shouldFlipBoard = (fen: string): boolean => fen.split(" ")[1] === "b";
 
   const playSequence = async () => {
     if (isPlayingSequence) return;
-    let isMounted = true;
     setIsPlayingSequence(true);
     setShowingSequence(true);
     const game = new Chess(currentPuzzle.fen);
-    if (isMounted) setSequenceGame(game);
-    try {
-      const moves = [
-        ...(currentPuzzle.moves || []),
-        ...(currentPuzzle.move_sequence || []),
-      ];
-      for (const move of moves) {
-        if (!isMounted) break;
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        const newGame = new Chess(game.fen());
-        newGame.move(move);
-        game.move(move);
-        if (isMounted) setSequenceGame(newGame);
-      }
-    } catch (error) {
-      console.error("Error playing sequence:", error);
-    } finally {
-      if (isMounted) {
-        setIsPlayingSequence(false);
-      }
+    setSequenceGame(game);
+    const moves = [
+      ...(currentPuzzle.moves || []),
+      ...(currentPuzzle.move_sequence || []),
+    ];
+    for (const move of moves) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      game.move(move);
+      setSequenceGame(new Chess(game.fen()));
     }
-    return () => {
-      isMounted = false;
-    };
+    setIsPlayingSequence(false);
   };
 
   const handleReset = () => {
@@ -77,11 +59,6 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
     isPlaying: isPlayingSequence,
     isShowing: showingSequence,
     hasSequence: !!(currentPuzzle.move_sequence || currentPuzzle.moves),
-  };
-
-  const handlers = {
-    onReset: handleReset,
-    onPlaySequence: playSequence,
   };
 
   return (
@@ -105,12 +82,9 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
         </div>
         <PuzzleActions
           sequenceState={sequenceState}
-          handlers={handlers}
+          handlers={{ onReset: handleReset, onPlaySequence: playSequence }}
           isSolved={isSolved}
         />
-        {isSolved && (
-          <SolutionMessage description={currentPuzzle.description} />
-        )}
       </ChessPuzzle.Root>
     </div>
   );

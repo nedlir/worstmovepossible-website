@@ -17,15 +17,9 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzles }) => {
 
   const currentPuzzle = puzzles[currentPuzzleIndex];
 
-  const nextPuzzle = () => {
-    setCurrentPuzzleIndex((prev) => (prev + 1) % puzzles.length);
-    setIsSolved(false);
-    setAttempts(0);
-  };
-
-  const previousPuzzle = () => {
+  const changePuzzle = (direction: number) => {
     setCurrentPuzzleIndex(
-      (prev) => (prev - 1 + puzzles.length) % puzzles.length
+      (prev) => (prev + direction + puzzles.length) % puzzles.length
     );
     setIsSolved(false);
     setAttempts(0);
@@ -39,16 +33,6 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzles }) => {
     setShowingSequence(false);
   };
 
-  const handleSolved = () => {
-    setIsSolved(true);
-  };
-
-  const playSequence = () => {
-    setIsPlayingSequence(true);
-    setShowingSequence(true);
-    // Implement the sequence playing logic here
-  };
-
   const sequenceState = {
     isPlaying: isPlayingSequence,
     isShowing: showingSequence,
@@ -57,7 +41,10 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzles }) => {
 
   const handlers = {
     onReset: handleReset,
-    onPlaySequence: playSequence,
+    onPlaySequence: () => {
+      setIsPlayingSequence(true);
+      setShowingSequence(true);
+    },
   };
 
   return (
@@ -68,13 +55,13 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzles }) => {
           resetKey={resetKey}
           isSolved={isSolved}
           onReset={handleReset}
-          onSolve={handleSolved}
+          onSolve={() => setIsSolved(true)}
         />
         <PuzzleComponentSidebar
           currentPuzzle={currentPuzzle}
           attempts={attempts}
-          onPrevious={previousPuzzle}
-          onNext={nextPuzzle}
+          onPrevious={() => changePuzzle(-1)}
+          onNext={() => changePuzzle(1)}
           sequenceState={sequenceState}
           handlers={handlers}
           isSolved={isSolved}

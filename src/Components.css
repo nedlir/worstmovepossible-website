@@ -1,5 +1,3 @@
-/* Components.css */
-
 :root {
   --primary-bg: #2f3136;
   --secondary-bg: #36393f;
@@ -30,7 +28,7 @@ body {
 .puzzle-content {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .board-container {
@@ -49,7 +47,7 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 3rem;
 }
 
 .puzzle-info h3 {
@@ -72,6 +70,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .control-button,

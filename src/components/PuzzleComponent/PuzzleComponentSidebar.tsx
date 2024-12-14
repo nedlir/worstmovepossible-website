@@ -1,12 +1,14 @@
 import React from "react";
 import { Puzzle } from "../../Puzzle";
 import { PreviousIcon, NextIcon } from "../../assets/Icons";
+import SolutionMessage from "../SolutionMessage/SolutionMessage";
 
 type PuzzleComponentSidebarProps = {
   currentPuzzle: Puzzle;
   attempts: number;
   onPrevious: () => void;
   onNext: () => void;
+  isSolved: boolean;
   sequenceState: {
     isPlaying: boolean;
     isShowing: boolean;
@@ -16,7 +18,6 @@ type PuzzleComponentSidebarProps = {
     onReset: () => void;
     onPlaySequence: () => void;
   };
-  isSolved: boolean;
 };
 
 const PuzzleComponentSidebar: React.FC<PuzzleComponentSidebarProps> = ({
@@ -24,6 +25,7 @@ const PuzzleComponentSidebar: React.FC<PuzzleComponentSidebarProps> = ({
   attempts,
   onPrevious,
   onNext,
+  isSolved,
 }) => (
   <div className="puzzle-sidebar">
     <div className="puzzle-info">
@@ -34,14 +36,13 @@ const PuzzleComponentSidebar: React.FC<PuzzleComponentSidebarProps> = ({
     </div>
     <div className="puzzle-controls">
       <button className="control-button" onClick={onPrevious}>
-        <PreviousIcon />
-        Previous
+        <PreviousIcon /> Previous
       </button>
       <button className="control-button" onClick={onNext}>
-        Next
-        <NextIcon />
+        Next <NextIcon />
       </button>
     </div>
+    {isSolved && <SolutionMessage description={currentPuzzle.description} />}
   </div>
 );
 
