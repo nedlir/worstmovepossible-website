@@ -1,5 +1,5 @@
 {
-  "name": "chess-puzzle",
+  "name": "worst-move-possible",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build --base=/worstmovepossible-website/",
     "lint": "eslint .",
     "preview": "vite preview",
     "audit": "npm audit",
