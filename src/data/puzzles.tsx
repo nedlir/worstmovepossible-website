@@ -56,14 +56,6 @@ export const puzzles = [
     description: "Moving the queen allows a mate in 2.",
   },
   {
-    id: "002E4",
-    fen: "8/8/kpq5/p4pQp/P7/7P/3r2P1/4R2K b - - 10 48",
-    moves: ["c6f6"],
-    makeFirstMove: false,
-    move_sequence: ["g5f6", "a6b7", "e1e7", "b7a6", "e7e1"],
-    description: "Trading queens leads to a losing endgame.",
-  },
-  {
     id: "002Uy",
     fen: "8/8/1p6/k7/P1R5/1K5r/8/8 w - - 26 64",
     moves: ["c4c3"],
@@ -136,22 +128,6 @@ export const puzzles = [
     description: "Taking the pawn leads to a mate in 2 with the queen.",
   },
   {
-    id: "009lk",
-    fen: "1R6/6pk/2p4p/3bP2r/5B1P/2P2qP1/P4P1Q/4R1K1 w - - 2 40",
-    moves: ["e1e4"],
-    makeFirstMove: false,
-    move_sequence: ["f3d1", "g1g2", "d5e4", "g2h3", "d1f1"],
-    description: "Rook to e4? More like 'Rookie' mistake! Queen takes control.",
-  },
-  {
-    id: "009oc",
-    fen: "5Q2/pbp3np/1p1pB1pk/1P6/P3q2P/6K1/8/8 b - - 1 32",
-    moves: ["e4g2"],
-    makeFirstMove: false,
-    move_sequence: ["g3f4", "g2f3"],
-    description: "Queen goes hunting kings, finds itself in checkmate instead!",
-  },
-  {
     id: "009uB",
     fen: "3br2r/5k1p/4p1pQ/P5P1/1B5P/P6q/5R2/6K1 b - - 1 35",
     moves: ["f7g8"],
@@ -167,14 +143,6 @@ export const puzzles = [
     makeFirstMove: false,
     move_sequence: ["h8d8"],
     description: "King takes a casual stroll, walks right into checkmate!",
-  },
-  {
-    id: "00Aae",
-    fen: "1R6/1P6/4pkp1/5p2/3P3p/3KP3/8/1r6 b - - 0 43",
-    moves: ["b1h1"],
-    makeFirstMove: false,
-    move_sequence: ["b8f8", "f6g5", "b7b8q", "g5h6", "f8h8"],
-    description: "Rook goes for a long trip, leaves the defense in shambles.",
   },
   {
     id: "00Ac7",
