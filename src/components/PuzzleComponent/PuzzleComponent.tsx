@@ -13,6 +13,7 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzles }) => {
   const [resetKey, setResetKey] = useState(0);
   const [isSolved, setIsSolved] = useState(false);
   const [attempts, setAttempts] = useState(0);
+
   const currentPuzzle = puzzles[currentPuzzleIndex];
 
   const nextPuzzle = () => {
