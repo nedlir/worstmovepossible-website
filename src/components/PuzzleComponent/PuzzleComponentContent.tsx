@@ -4,7 +4,7 @@ import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import { Puzzle } from "../../Puzzle";
 import SolutionMessage from "../SolutionMessage/SolutionMessage";
-import { ResetIcon, HintIcon, PlayIcon } from "../../assets/Icons";
+import PuzzleActions from "./PuzzleActions";
 import "./PuzzleComponentContent.css";
 
 type PuzzleComponentContentProps = {
@@ -34,11 +34,12 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
   const playSequence = async () => {
     if (isPlayingSequence) return;
 
+    let isMounted = true;
     setIsPlayingSequence(true);
     setShowingSequence(true);
 
     const game = new Chess(currentPuzzle.fen);
-    setSequenceGame(game);
+    if (isMounted) setSequenceGame(game);
 
     try {
       const moves = [
@@ -47,17 +48,24 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
       ];
 
       for (const move of moves) {
+        if (!isMounted) break;
         await new Promise((resolve) => setTimeout(resolve, 1000));
         const newGame = new Chess(game.fen());
         newGame.move(move);
         game.move(move);
-        setSequenceGame(newGame);
+        if (isMounted) setSequenceGame(newGame);
       }
     } catch (error) {
       console.error("Error playing sequence:", error);
     } finally {
-      setIsPlayingSequence(false);
+      if (isMounted) {
+        setIsPlayingSequence(false);
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   };
 
   const handleReset = () => {
@@ -70,6 +78,17 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
   useEffect(() => {
     handleReset();
   }, [currentPuzzle.id]);
+
+  const sequenceState = {
+    isPlaying: isPlayingSequence,
+    isShowing: showingSequence,
+    hasSequence: !!(currentPuzzle.move_sequence || currentPuzzle.moves),
+  };
+
+  const handlers = {
+    onReset: handleReset,
+    onPlaySequence: playSequence,
+  };
 
   return (
     <div className="puzzle-content">
@@ -91,37 +110,11 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
           )}
         </div>
 
-        <div className="puzzle-actions">
-          <ChessPuzzle.Reset asChild onReset={handleReset}>
-            <button className="action-button" disabled={isPlayingSequence}>
-              <ResetIcon />
-              Reset
-            </button>
-          </ChessPuzzle.Reset>
-
-          <ChessPuzzle.Hint asChild>
-            <button
-              className="action-button"
-              disabled={showingSequence || isPlayingSequence}
-            >
-              <HintIcon />
-              Hint
-            </button>
-          </ChessPuzzle.Hint>
-
-          {isSolved &&
-            (currentPuzzle.move_sequence || currentPuzzle.moves) &&
-            !showingSequence && (
-              <button
-                className="action-button"
-                onClick={playSequence}
-                disabled={isPlayingSequence}
-              >
-                <PlayIcon />
-                {isPlayingSequence ? "Playing..." : "Play Sequence"}
-              </button>
-            )}
-        </div>
+        <PuzzleActions
+          sequenceState={sequenceState}
+          handlers={handlers}
+          isSolved={isSolved}
+        />
 
         {isSolved && (
           <SolutionMessage description={currentPuzzle.description} />

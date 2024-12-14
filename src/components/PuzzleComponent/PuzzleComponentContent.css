@@ -15,39 +15,6 @@
   box-sizing: border-box;
 }
 
-.puzzle-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.action-button {
-  flex: 1 1 auto;
-  min-width: 120px;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: none;
-  border-radius: 4px;
-  background-color: #ae917b;
-  color: var(--text-color);
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.action-button:hover:not(:disabled) {
-  background-color: #c16c6c;
-}
-
-.action-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 @media (min-width: 768px) {
   .action-button {
     flex: 0 1 auto;

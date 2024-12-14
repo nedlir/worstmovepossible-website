@@ -348,15 +348,6 @@ export const puzzles = [
     description: "King escapes to e7, but the rooks have other ideas!",
   },
   {
-    id: "009Os",
-    fen: "r2b2k1/1p3q1p/p2p4/3P2p1/2P1PRQr/8/P2B3P/2R4K w - - 1 29",
-    moves: ["g4h5"],
-    makeFirstMove: false,
-    move_sequence: ["f7h5", "f4f2", "d8b6", "c1g1", "b6f2"],
-    description:
-      "Queen ventures to h5, Black's counter-attack proves decisive!",
-  },
-  {
     id: "009bR",
     fen: "4r2k/3q2r1/1p4pQ/p1pP4/2P4P/1N4p1/PP3RK1/8 b - - 1 37",
     moves: ["g7h7"],
