@@ -5,7 +5,7 @@ import { Chess } from "chess.js";
 import { Puzzle } from "../../Puzzle";
 import PuzzleActions from "./PuzzleActions";
 
-type PuzzleComponentContentProps = {
+type PuzzleContentProps = {
   currentPuzzle: Puzzle;
   resetKey: number;
   isSolved: boolean;
@@ -13,7 +13,7 @@ type PuzzleComponentContentProps = {
   onSolve: () => void;
 };
 
-const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
+const PuzzleContent: React.FC<PuzzleContentProps> = ({
   currentPuzzle,
   resetKey,
   isSolved,
@@ -90,4 +90,4 @@ const PuzzleComponentContent: React.FC<PuzzleComponentContentProps> = ({
   );
 };
 
-export default PuzzleComponentContent;
+export default PuzzleContent;

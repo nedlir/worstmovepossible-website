@@ -3,7 +3,7 @@ import { Puzzle } from "../../Puzzle";
 import { PreviousIcon, NextIcon } from "../../assets/Icons";
 import SolutionMessage from "../SolutionMessage/SolutionMessage";
 
-type PuzzleComponentSidebarProps = {
+type PuzzleSidebarProps = {
   currentPuzzle: Puzzle;
   attempts: number;
   onPrevious: () => void;
@@ -20,7 +20,7 @@ type PuzzleComponentSidebarProps = {
   };
 };
 
-const PuzzleComponentSidebar: React.FC<PuzzleComponentSidebarProps> = ({
+const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({
   currentPuzzle,
   attempts,
   onPrevious,
@@ -46,4 +46,4 @@ const PuzzleComponentSidebar: React.FC<PuzzleComponentSidebarProps> = ({
   </div>
 );
 
-export default PuzzleComponentSidebar;
+export default PuzzleSidebar;

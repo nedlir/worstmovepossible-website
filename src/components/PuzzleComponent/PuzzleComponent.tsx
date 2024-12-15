@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Puzzle } from "../../Puzzle";
-import PuzzleComponentSidebar from "./PuzzleComponentSidebar";
-import PuzzleComponentContent from "./PuzzleComponentContent";
+import PuzzleComponentSidebar from "./PuzzleSidebar";
+import PuzzleComponentContent from "./PuzzleContent";
 
 type PuzzleComponentProps = {
   puzzles: Puzzle[];
@@ -48,23 +48,25 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzles }) => {
   };
 
   return (
-    <div className="puzzle-container">
-      <PuzzleComponentContent
-        currentPuzzle={currentPuzzle}
-        resetKey={resetKey}
-        isSolved={isSolved}
-        onReset={handleReset}
-        onSolve={() => setIsSolved(true)}
-      />
-      <PuzzleComponentSidebar
-        currentPuzzle={currentPuzzle}
-        attempts={attempts}
-        onPrevious={() => changePuzzle(-1)}
-        onNext={() => changePuzzle(1)}
-        sequenceState={sequenceState}
-        handlers={handlers}
-        isSolved={isSolved}
-      />
+    <div className="puzzle-component">
+      <div className="puzzle-container">
+        <PuzzleComponentContent
+          currentPuzzle={currentPuzzle}
+          resetKey={resetKey}
+          isSolved={isSolved}
+          onReset={handleReset}
+          onSolve={() => setIsSolved(true)}
+        />
+        <PuzzleComponentSidebar
+          currentPuzzle={currentPuzzle}
+          attempts={attempts}
+          onPrevious={() => changePuzzle(-1)}
+          onNext={() => changePuzzle(1)}
+          sequenceState={sequenceState}
+          handlers={handlers}
+          isSolved={isSolved}
+        />
+      </div>
     </div>
   );
 };
