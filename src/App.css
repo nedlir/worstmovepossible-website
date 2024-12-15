@@ -1,3 +1,6 @@
+/* ============================= */
+/* Root Variables */
+/* ============================= */
 :root {
   --primary-color: #36393f;
   --secondary-color: #2f3136;
@@ -9,15 +12,20 @@
   --red-color: #f04747;
   --button-color: #4f545c;
   --button-hover-color: #5865f2;
+  --accent-color: #7289da;
+  --border-color: #40444b;
+
+  /* Sizes */
   --board-size: min(calc(100vw - 1.5rem), 400px);
   --puzzle-container-padding: 0.25rem;
   --nav-height-mobile: 56px;
   --nav-height-desktop: 64px;
-  --accent-color: #7289da;
-  --border-color: #40444b;
   --max-puzzle-width: 80vw;
 }
 
+/* ============================= */
+/* Global Styles */
+/* ============================= */
 body {
   background-color: var(--primary-color);
   color: var(--text-color);
@@ -27,12 +35,18 @@ body {
   overflow-x: hidden;
 }
 
+/* ============================= */
+/* App Container */
+/* ============================= */
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
+/* ============================= */
+/* Navigation Bar */
+/* ============================= */
 .nav-container {
   background: var(--tertiary-color);
   padding: 0 1rem;
@@ -40,7 +54,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--border-color);
   position: fixed;
   top: 0;
   left: 0;
@@ -48,10 +62,18 @@ body {
   z-index: 1000;
 }
 
+/* Navigation Items */
 .nav-left {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.logo a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .nav-divider {
@@ -62,13 +84,9 @@ body {
   display: none;
 }
 
-.logo a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
+/* ============================= */
+/* Main Content */
+/* ============================= */
 .main-content {
   flex: 1;
   display: flex;
@@ -81,6 +99,9 @@ body {
   margin-right: auto;
 }
 
+/* ============================= */
+/* Mobile Menu Button */
+/* ============================= */
 .mobile-menu-button {
   background: none;
   border: none;
@@ -90,6 +111,9 @@ body {
   padding: 0.5rem;
 }
 
+/* ============================= */
+/* Mobile Navigation */
+/* ============================= */
 .mobile-nav {
   position: fixed;
   top: var(--nav-height-mobile);
@@ -114,6 +138,11 @@ body {
   font-size: 1rem;
 }
 
+/* ============================= */
+/* Media Queries for Responsiveness */
+/* ============================= */
+
+/* Tablet and Desktop */
 @media (min-width: 768px) {
   .nav-container {
     height: var(--nav-height-desktop);
@@ -150,6 +179,7 @@ body {
 
   .main-content {
     margin-top: var(--nav-height-desktop);
+    max-width: 90vw;
   }
 
   .mobile-nav {
@@ -157,16 +187,14 @@ body {
   }
 }
 
+/* Larger Screens */
 @media (min-width: 1024px) {
   .nav-container {
     padding: 0 3rem;
   }
-
-  .main-content {
-    max-width: 90vw;
-  }
 }
 
+/* Mobile Specific Styles */
 @media (max-width: 767px) {
   .nav-container {
     height: var(--nav-height-mobile);

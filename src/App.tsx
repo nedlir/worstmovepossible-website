@@ -13,18 +13,14 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const checkMobile = () => {
-      const isMobileView = window.innerWidth <= 768 || isDeviceMobile;
-      setIsMobile(isMobileView);
+      setIsMobile(window.innerWidth <= 768 || isDeviceMobile);
     };
 
-    // Initial check
-    checkMobile();
+    checkMobile(); // Initial check
 
-    // Add event listener
     window.addEventListener("resize", checkMobile);
 
-    // Cleanup
-    return () => window.removeEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile); // Cleanup
   }, []);
 
   const toggleMobileMenu = () => {
@@ -49,7 +45,7 @@ const App: React.FC = () => {
           <div className="nav-left">
             <div className="logo">
               <Link to="/" onClick={closeMobileMenu} {...touchProps}>
-                ♟ WorstMovePossible.com 123
+                ♟ WorstMovePossible.com
                 <span className="logo-beta-badge">BETA</span>
               </Link>
             </div>
