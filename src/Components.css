@@ -1,3 +1,4 @@
+/* Base styles */
 .puzzle-container {
   display: flex;
   flex-direction: column;
@@ -8,23 +9,21 @@
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  gap: 1rem;
 }
 
 .puzzle-content {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   width: 100%;
-  height: 100vh;
-  overflow-y: auto;
 }
 
 .board-and-actions {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100%;
+  justify-content: center;
 }
 
 .board-container {
@@ -71,18 +70,6 @@
   width: 100%;
 }
 
-@media (min-width: 768px) {
-  .puzzle-container {
-    flex-direction: column;
-  }
-
-  .puzzle-sidebar {
-    width: 100%;
-    max-width: none;
-    height: auto;
-  }
-}
-
 .solution-message {
   background-color: #43b581;
   color: white;
@@ -92,6 +79,7 @@
   animation: fadeIn 0.5s ease-out;
 }
 
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -100,5 +88,23 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Media queries */
+@media (min-width: 1200px) {
+  .puzzle-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .puzzle-content {
+    flex: 1;
+  }
+
+  .puzzle-sidebar {
+    width: 300px;
+    position: sticky;
+    top: calc(var(--nav-height) + 1rem);
   }
 }
