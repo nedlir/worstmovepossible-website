@@ -247,3 +247,41 @@
     background: #5a5a5a;
   }
 }
+
+/* Add this to your existing CSS */
+
+@media (max-width: 768px) {
+  .puzzle-actions {
+    margin-top: 1rem;
+  }
+
+  .control-button,
+  .action-button {
+    padding: 1rem 1.5rem;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+  }
+
+  .control-button svg,
+  .action-button svg {
+    width: clamp(18px, 4vw, 24px);
+    height: clamp(18px, 4vw, 24px);
+  }
+}
+
+@media (max-width: 480px) {
+  .puzzle-actions {
+    margin-top: 1.5rem;
+  }
+
+  .control-button,
+  .action-button {
+    padding: 1.25rem 2rem;
+    font-size: clamp(1.125rem, 3vw, 1.5rem);
+  }
+
+  .control-button svg,
+  .action-button svg {
+    width: clamp(22px, 5vw, 28px);
+    height: clamp(22px, 5vw, 28px);
+  }
+}
