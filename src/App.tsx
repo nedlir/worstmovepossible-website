@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, Suspense } from "react";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
+import { isMobile, BrowserView, MobileView } from "react-device-detect";
 import PuzzlePage from "./views/PuzzlePage/PuzzlePage";
 import AboutPage from "./views/AboutPage/AboutPage";
 import ContributePage from "./views/ContributePage/ContributePage";
@@ -8,25 +9,6 @@ import "./Components.css";
 
 const App: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  const checkMobile = () => {
-    // Set isMobile to true if screen width is less than or equal to 768px
-    setIsMobile(window.innerWidth <= 768);
-  };
-
-  useEffect(() => {
-    // Initial check on component mount
-    checkMobile();
-
-    // Add event listener for resizing the window
-    window.addEventListener("resize", checkMobile);
-
-    // Cleanup event listener on unmount
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-    };
-  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -36,47 +18,59 @@ const App: React.FC = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const touchProps = {
+    role: "button",
+    tabIndex: 0,
+    onTouchStart: () => {},
+    style: { touchAction: "manipulation" as const },
+  };
+
   return (
     <HashRouter>
       <div className={`app ${isMobile ? "mobile" : "desktop"}`}>
         <nav className="nav-container">
           <div className="nav-left">
             <div className="logo">
-              <Link to="/" onClick={closeMobileMenu}>
+              <Link to="/" onClick={closeMobileMenu} {...touchProps}>
                 ♟ WorstMovePossible.com
+                <span className="logo-beta-badge">BETA</span>
               </Link>
-              <span className="logo-beta-badge">BETA</span>
             </div>
-            {!isMobile && (
-              <>
-                <div className="nav-divider"></div>
-                <div className="nav-links">
-                  <Link to="/">Puzzles</Link>
-                  <Link to="/about">About</Link>
-                  <Link to="/contribute">Contribute</Link>
-                </div>
-              </>
-            )}
+            <BrowserView>
+              <div className="nav-divider"></div>
+              <div className="nav-links">
+                <Link to="/">Puzzles</Link>
+                <Link to="/about">About</Link>
+                <Link to="/contribute">Contribute</Link>
+              </div>
+            </BrowserView>
           </div>
-          {isMobile && (
-            <button className="mobile-menu-button" onClick={toggleMobileMenu}>
+          <MobileView>
+            <button
+              className="mobile-menu-button"
+              onClick={toggleMobileMenu}
+              {...touchProps}
+              aria-label="Toggle menu"
+            >
               ☰
             </button>
-          )}
+          </MobileView>
         </nav>
-        {isMobile && (
+
+        <MobileView>
           <div className={`mobile-nav ${isMobileMenuOpen ? "open" : ""}`}>
-            <Link to="/" onClick={closeMobileMenu}>
+            <Link to="/" onClick={closeMobileMenu} {...touchProps}>
               Puzzles
             </Link>
-            <Link to="/about" onClick={closeMobileMenu}>
+            <Link to="/about" onClick={closeMobileMenu} {...touchProps}>
               About
             </Link>
-            <Link to="/contribute" onClick={closeMobileMenu}>
+            <Link to="/contribute" onClick={closeMobileMenu} {...touchProps}>
               Contribute
             </Link>
           </div>
-        )}
+        </MobileView>
+
         <main className="main-content">
           <Routes>
             <Route path="/" element={<PuzzlePage />} />

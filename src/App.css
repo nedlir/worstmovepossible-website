@@ -115,7 +115,6 @@ body {
 }
 
 @media (min-width: 768px) {
-  /* For tablets and larger */
   .nav-container {
     height: var(--nav-height-desktop);
     padding: 0 2rem;
@@ -159,7 +158,6 @@ body {
 }
 
 @media (min-width: 1024px) {
-  /* For large screens like desktops */
   .nav-container {
     padding: 0 3rem;
   }
@@ -169,9 +167,7 @@ body {
   }
 }
 
-/* Additional improvements for better responsiveness on mobile devices */
 @media (max-width: 767px) {
-  /* For mobile devices */
   .nav-container {
     height: var(--nav-height-mobile);
     padding: 0 1rem;
@@ -182,10 +178,9 @@ body {
   }
 
   .mobile-nav a {
-    font-size: 1.2rem; /* Slightly larger text for better readability */
+    font-size: 1.2rem;
   }
 
-  /* Optional: Add transitions for smoother experience */
   .main-content {
     padding: var(--puzzle-container-padding);
   }
