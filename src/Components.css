@@ -16,6 +16,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: center;
 }
 
 .board-and-actions {
@@ -24,10 +25,12 @@
   align-items: center;
   min-height: 100%;
   justify-content: center;
+  width: min(75vh, 95vw);
+  max-width: 100%; /* New */
 }
 
 .board-container {
-  width: min(75vh, 95vw);
+  width: min(75vh, 95vw); /* Changed back to original */
   height: min(75vh, 95vw);
   aspect-ratio: 1;
   margin: 0 auto;
@@ -52,6 +55,8 @@
   background-color: var(--secondary-color);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .control-button,
@@ -96,15 +101,19 @@
   .puzzle-container {
     flex-direction: row;
     align-items: flex-start;
+    justify-content: center;
   }
 
   .puzzle-content {
     flex: 1;
+    max-width: calc(100% - 320px);
+    min-width: min(75vh, 95vw); /* New - ensures minimum width for board */
   }
 
   .puzzle-sidebar {
     width: 300px;
     position: sticky;
     top: calc(var(--nav-height) + 1rem);
+    margin-left: 1rem;
   }
 }
