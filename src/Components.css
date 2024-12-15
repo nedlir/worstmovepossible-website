@@ -41,15 +41,15 @@
 .puzzle-actions {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
   width: 100%;
   max-width: min(75vh, 95vw);
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .puzzle-sidebar {
-  width: min(75vh, 95vw);
-  max-width: 100%;
+  width: 100%;
+  max-width: min(75vh, 95vw);
   padding: 1.5rem;
   background-color: #262421;
   border-radius: 8px;
@@ -60,6 +60,13 @@
   flex-direction: column;
   gap: 1rem;
   box-sizing: border-box;
+  margin-top: 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.puzzle-sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .control-button,
@@ -68,15 +75,15 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  font-size: clamp(0.875rem, 2vw, 1rem);
+  padding: 1rem 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   background-color: #4a4a4a;
   color: #ffffff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   width: 100%;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .control-button:hover,
@@ -86,13 +93,13 @@
 
 .control-button:active,
 .action-button:active {
-  transform: translateY(1px);
+  transform: translateY(2px);
 }
 
 .control-button svg,
 .action-button svg {
-  width: clamp(14px, 3vw, 16px);
-  height: clamp(14px, 3vw, 16px);
+  width: clamp(18px, 4vw, 24px);
+  height: clamp(18px, 4vw, 24px);
   fill: currentColor;
 }
 
@@ -102,14 +109,11 @@
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1rem;
-  animation: fadeIn 0.5s ease-out;
-  opacity: 0;
-  transform: translateY(10px);
   animation: fadeInUp 0.3s ease forwards;
 }
 
 .puzzle-info {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .puzzle-info h3 {
@@ -127,7 +131,7 @@
 .puzzle-controls {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .reset-button:disabled {
@@ -137,7 +141,7 @@
   border: 1px solid #999999;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -148,140 +152,33 @@
   }
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Media queries */
 @media (min-width: 1200px) {
   .puzzle-container {
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
+    align-items: stretch; /* Stretch both content and sidebar to match height */
+    justify-content: flex-start; /* Adjust spacing between content and sidebar */
+    padding: 1rem; /* Add some breathing room */
   }
 
   .puzzle-content {
     flex: 1;
-    max-width: calc(100% - 320px);
-    min-width: min(75vh, 95vw);
+    max-width: calc(100% - 350px); /* Adjust based on sidebar width */
+    min-width: 600px; /* Ensure minimum width for content */
+    margin-right: 1rem; /* Add spacing between content and sidebar */
   }
 
   .puzzle-sidebar {
-    width: 300px;
+    width: 350px; /* Slightly wider for better usability */
     position: sticky;
     top: calc(var(--nav-height) + 1rem);
-    margin-left: 1rem;
-    height: auto;
-    max-height: 90vh;
-  }
-}
-
-@media (max-width: 768px) {
-  .puzzle-sidebar {
-    max-width: 100%;
-    border-radius: 0;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #1b1b1a;
-    z-index: 100;
-  }
-
-  .puzzle-info {
-    margin-bottom: 1rem;
-  }
-
-  .puzzle-controls {
-    position: sticky;
-    bottom: 0;
-    padding: 0.5rem 0;
-    margin-bottom: 0;
-  }
-
-  .control-button,
-  .action-button {
-    padding: 0.625rem 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .puzzle-container {
-    padding: 0.25rem;
-  }
-
-  .board-and-actions,
-  .board-container,
-  .puzzle-actions {
-    width: 100%;
-  }
-
-  .puzzle-sidebar {
-    padding: 0.75rem;
-  }
-
-  .puzzle-controls {
-    flex-wrap: wrap;
-  }
-
-  .control-button,
-  .action-button {
-    flex: 1 0 calc(50% - 0.5rem);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .puzzle-sidebar {
-    background: #1b1b1a;
-  }
-
-  .control-button {
-    background: #4a4a4a;
-  }
-
-  .control-button:hover {
-    background: #5a5a5a;
-  }
-}
-
-/* Add this to your existing CSS */
-
-@media (max-width: 768px) {
-  .puzzle-actions {
-    margin-top: 1rem;
-  }
-
-  .control-button,
-  .action-button {
-    padding: 1rem 1.5rem;
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-  }
-
-  .control-button svg,
-  .action-button svg {
-    width: clamp(18px, 4vw, 24px);
-    height: clamp(18px, 4vw, 24px);
-  }
-}
-
-@media (max-width: 480px) {
-  .puzzle-actions {
-    margin-top: 1.5rem;
-  }
-
-  .control-button,
-  .action-button {
-    padding: 1.25rem 2rem;
-    font-size: clamp(1.125rem, 3vw, 1.5rem);
-  }
-
-  .control-button svg,
-  .action-button svg {
-    width: clamp(22px, 5vw, 28px);
-    height: clamp(22px, 5vw, 28px);
+    margin-left: auto; /* Align to the right */
+    height: 100%; /* Make sidebar height match content */
+    max-height: 100%; /* Ensure it does not overflow */
+    margin-top: 0;
+    overflow-y: auto;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Enhance shadow for better separation */
+    padding: 1.5rem; /* Ensure consistent padding */
+    background-color: #262421; /* Retain dark theme */
+    border-radius: 10px; /* Slightly larger border radius for aesthetic appeal */
   }
 }
