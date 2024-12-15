@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import PuzzlePage from "./views/PuzzlePage/PuzzlePage";
 import AboutPage from "./views/AboutPage/AboutPage";
 import ContributePage from "./views/ContributePage/ContributePage";
-import { isMobile } from "react-device-detect";
 import "./App.css";
 import "./Components.css";
 
 const App: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const checkMobile = () => {
+    // Set isMobile to true if screen width is less than or equal to 768px
+    setIsMobile(window.innerWidth <= 768);
+  };
+
+  useEffect(() => {
+    // Initial check on component mount
+    checkMobile();
+
+    // Add event listener for resizing the window
+    window.addEventListener("resize", checkMobile);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
