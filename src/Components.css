@@ -1,9 +1,7 @@
-/* Base styles */
 .puzzle-container {
   display: flex;
   flex-direction: column;
-  max-width: var(--max-puzzle-width);
-  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0.5rem;
   min-height: 100vh;
@@ -26,16 +24,16 @@
   min-height: 100%;
   justify-content: center;
   width: min(75vh, 95vw);
-  max-width: 100%; /* New */
+  max-width: 100%;
 }
 
 .board-container {
-  width: min(75vh, 95vw); /* Changed back to original */
+  width: min(75vh, 95vw);
   height: min(75vh, 95vw);
   aspect-ratio: 1;
   margin: 0 auto;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
@@ -50,13 +48,18 @@
 }
 
 .puzzle-sidebar {
-  width: 100%;
-  padding: 1rem;
-  background-color: var(--secondary-color);
+  width: min(75vh, 95vw);
+  max-width: 100%;
+  padding: 1.5rem;
+  background-color: #262421;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-height: 90vh;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-sizing: border-box;
 }
 
 .control-button,
@@ -66,13 +69,31 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
-  font-size: 1rem;
-  background-color: var(--button-color);
-  color: var(--text-color);
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  background-color: #4a4a4a;
+  color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
+  transition: background 0.2s ease;
+}
+
+.control-button:hover,
+.action-button:hover {
+  background: #70583b;
+}
+
+.control-button:active,
+.action-button:active {
+  transform: translateY(1px);
+}
+
+.control-button svg,
+.action-button svg {
+  width: clamp(14px, 3vw, 16px);
+  height: clamp(14px, 3vw, 16px);
+  fill: currentColor;
 }
 
 .solution-message {
@@ -82,14 +103,52 @@
   padding: 1rem;
   margin-top: 1rem;
   animation: fadeIn 0.5s ease-out;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.3s ease forwards;
 }
 
-/* Animations */
+.puzzle-info {
+  margin-bottom: 2rem;
+}
+
+.puzzle-info h3 {
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: #ffffff;
+}
+
+.puzzle-stats {
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  color: #9fa0a2;
+}
+
+.puzzle-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.reset-button:disabled {
+  background-color: #cccccc;
+  color: #634747;
+  cursor: not-allowed;
+  border: 1px solid #999999;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(10px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
@@ -107,7 +166,7 @@
   .puzzle-content {
     flex: 1;
     max-width: calc(100% - 320px);
-    min-width: min(75vh, 95vw); /* New - ensures minimum width for board */
+    min-width: min(75vh, 95vw);
   }
 
   .puzzle-sidebar {
@@ -115,5 +174,76 @@
     position: sticky;
     top: calc(var(--nav-height) + 1rem);
     margin-left: 1rem;
+    height: auto;
+    max-height: 90vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .puzzle-sidebar {
+    max-width: 100%;
+    border-radius: 0;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1b1b1a;
+    z-index: 100;
+  }
+
+  .puzzle-info {
+    margin-bottom: 1rem;
+  }
+
+  .puzzle-controls {
+    position: sticky;
+    bottom: 0;
+    padding: 0.5rem 0;
+    margin-bottom: 0;
+  }
+
+  .control-button,
+  .action-button {
+    padding: 0.625rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .puzzle-container {
+    padding: 0.25rem;
+  }
+
+  .board-and-actions,
+  .board-container,
+  .puzzle-actions {
+    width: 100%;
+  }
+
+  .puzzle-sidebar {
+    padding: 0.75rem;
+  }
+
+  .puzzle-controls {
+    flex-wrap: wrap;
+  }
+
+  .control-button,
+  .action-button {
+    flex: 1 0 calc(50% - 0.5rem);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .puzzle-sidebar {
+    background: #1b1b1a;
+  }
+
+  .control-button {
+    background: #4a4a4a;
+  }
+
+  .control-button:hover {
+    background: #5a5a5a;
   }
 }
