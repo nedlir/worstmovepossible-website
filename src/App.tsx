@@ -31,7 +31,7 @@ const App: React.FC = () => {
           <div className="nav-left">
             <div className="logo">
               <Link to="/" onClick={closeMobileMenu} {...touchProps}>
-                ♟ WorstMovePossible.com 990
+                ♟ WorstMovePossible.com
                 <span className="logo-beta-badge">BETA</span>
               </Link>
             </div>
