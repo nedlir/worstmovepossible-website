@@ -10,7 +10,6 @@
   --button-color: #4f545c;
   --button-hover-color: #5865f2;
   --board-size: min(calc(100vw - 1.5rem), 400px);
-  --board-size: min(calc(100vw - 1.5rem), 00px);
   --puzzle-container-padding: 0.25rem;
   --nav-height-mobile: 56px;
   --nav-height-desktop: 64px;
@@ -36,7 +35,7 @@ body {
 
 .nav-container {
   background: var(--tertiary-color);
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   height: var(--nav-height-mobile);
   display: flex;
   align-items: center;
@@ -56,25 +55,11 @@ body {
 }
 
 .nav-divider {
-  width: 1px;
-  height: 24px;
-  background: var(--muted-color);
-  margin: 0 0.5rem;
+  display: none;
 }
 
 .nav-links {
   display: none;
-}
-
-.nav-links a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.nav-links a:hover {
-  text-decoration: underline;
 }
 
 .logo a {
@@ -92,32 +77,16 @@ body {
   padding: var(--puzzle-container-padding);
   margin-top: var(--nav-height-mobile);
   max-width: var(--max-puzzle-width);
-  margin: 0 auto;
-}
-
-.logo-beta-badge {
-  cursor: default;
-  background-color: #ff6b6b;
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin-left: 0.5rem;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  animation: float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mobile-menu-button {
-  display: block;
   background: none;
   border: none;
   color: var(--text-color);
   font-size: 1.5rem;
   cursor: pointer;
-  margin-right: 2rem;
   padding: 0.5rem;
 }
 
@@ -143,4 +112,57 @@ body {
   color: var(--text-color);
   text-decoration: none;
   font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .nav-container {
+    height: var(--nav-height-desktop);
+    padding: 0 2rem;
+  }
+
+  .nav-divider {
+    display: block;
+    width: 1px;
+    height: 24px;
+    background: var(--muted-color);
+    margin: 0 0.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+
+  .mobile-menu-button {
+    display: none;
+  }
+
+  .main-content {
+    margin-top: var(--nav-height-desktop);
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav-container {
+    padding: 0 3rem;
+  }
+
+  .main-content {
+    max-width: 90vw;
+  }
 }
