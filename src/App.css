@@ -1,6 +1,4 @@
-/* ============================= */
 /* Root Variables */
-/* ============================= */
 :root {
   --primary-color: #36393f;
   --secondary-color: #2f3136;
@@ -14,18 +12,13 @@
   --button-hover-color: #5865f2;
   --accent-color: #7289da;
   --border-color: #40444b;
-
-  /* Sizes */
+  --nav-height: 56px;
   --board-size: min(calc(100vw - 1.5rem), 400px);
   --puzzle-container-padding: 0.25rem;
-  --nav-height-mobile: 56px;
-  --nav-height-desktop: 64px;
   --max-puzzle-width: 80vw;
 }
 
-/* ============================= */
 /* Global Styles */
-/* ============================= */
 body {
   background-color: var(--primary-color);
   color: var(--text-color);
@@ -35,22 +28,18 @@ body {
   overflow-x: hidden;
 }
 
-/* ============================= */
 /* App Container */
-/* ============================= */
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* ============================= */
 /* Navigation Bar */
-/* ============================= */
 .nav-container {
   background: var(--tertiary-color);
   padding: 0 1rem;
-  height: var(--nav-height-mobile);
+  height: var(--nav-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -84,24 +73,20 @@ body {
   display: none;
 }
 
-/* ============================= */
 /* Main Content */
-/* ============================= */
 .main-content {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: var(--puzzle-container-padding);
-  margin-top: var(--nav-height-mobile);
+  margin-top: var(--nav-height);
   max-width: var(--max-puzzle-width);
   margin-left: auto;
   margin-right: auto;
 }
 
-/* ============================= */
 /* Mobile Menu Button */
-/* ============================= */
 .mobile-menu-button {
   background: none;
   border: none;
@@ -111,12 +96,10 @@ body {
   padding: 0.5rem;
 }
 
-/* ============================= */
 /* Mobile Navigation */
-/* ============================= */
 .mobile-nav {
   position: fixed;
-  top: var(--nav-height-mobile);
+  top: var(--nav-height);
   left: 0;
   right: 0;
   background: var(--tertiary-color);
@@ -135,81 +118,26 @@ body {
   padding: 0.75rem;
   color: var(--text-color);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
-/* ============================= */
-/* Media Queries for Responsiveness */
-/* ============================= */
-
-/* Tablet and Desktop */
+/* Desktop Overrides to Force Mobile Layout */
 @media (min-width: 768px) {
   .nav-container {
-    height: var(--nav-height-desktop);
-    padding: 0 2rem;
-  }
-
-  .nav-divider {
-    display: block;
-    width: 1px;
-    height: 24px;
-    background: var(--muted-color);
-    margin: 0 0.5rem;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-
-  .nav-links a:hover {
-    text-decoration: underline;
-  }
-
-  .mobile-menu-button {
-    display: none;
-  }
-
-  .main-content {
-    margin-top: var(--nav-height-desktop);
-    max-width: 90vw;
-  }
-
-  .mobile-nav {
-    display: none;
-  }
-}
-
-/* Larger Screens */
-@media (min-width: 1024px) {
-  .nav-container {
-    padding: 0 3rem;
-  }
-}
-
-/* Mobile Specific Styles */
-@media (max-width: 767px) {
-  .nav-container {
-    height: var(--nav-height-mobile);
+    height: var(--nav-height);
     padding: 0 1rem;
   }
 
-  .logo a {
-    font-size: 1.2rem;
+  .mobile-menu-button {
+    display: block;
   }
 
-  .mobile-nav a {
-    font-size: 1.2rem;
+  .nav-links {
+    display: none;
   }
 
   .main-content {
-    padding: var(--puzzle-container-padding);
+    margin-top: var(--nav-height);
+    max-width: var(--max-puzzle-width);
   }
 }
