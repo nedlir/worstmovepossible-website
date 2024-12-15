@@ -105,9 +105,13 @@
 .solution-message {
   background-color: #43b581;
   color: white;
-  border-radius: 8px;
-  padding: 0.75rem;
-  animation: fadeInUp 0.3s ease forwards;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  animation: fadeInUp 0.2s ease-out;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .puzzle-info {
