@@ -44,7 +44,7 @@
   gap: 0.5rem;
   width: 100%;
   max-width: min(75vh, 95vw);
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .puzzle-sidebar {
@@ -60,7 +60,7 @@
   flex-direction: column;
   gap: 1rem;
   box-sizing: border-box;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -155,30 +155,67 @@
 @media (min-width: 1200px) {
   .puzzle-container {
     flex-direction: row;
-    align-items: stretch; /* Stretch both content and sidebar to match height */
-    justify-content: flex-start; /* Adjust spacing between content and sidebar */
-    padding: 1rem; /* Add some breathing room */
+    align-items: stretch;
+    justify-content: flex-start;
   }
 
   .puzzle-content {
     flex: 1;
-    max-width: calc(100% - 350px); /* Adjust based on sidebar width */
-    min-width: 600px; /* Ensure minimum width for content */
-    margin-right: 1rem; /* Add spacing between content and sidebar */
+    max-width: calc(100% - 350px);
+    min-width: 600px;
+    margin-right: 1rem;
   }
 
   .puzzle-sidebar {
-    width: 350px; /* Slightly wider for better usability */
+    width: 350px;
     position: sticky;
     top: calc(var(--nav-height) + 1rem);
-    margin-left: auto; /* Align to the right */
-    height: 100%; /* Make sidebar height match content */
-    max-height: 100%; /* Ensure it does not overflow */
+    margin-left: auto;
+    height: 100%;
+    max-height: 100%;
     margin-top: 0;
     overflow-y: auto;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Enhance shadow for better separation */
-    padding: 1.5rem; /* Ensure consistent padding */
-    background-color: #262421; /* Retain dark theme */
-    border-radius: 10px; /* Slightly larger border radius for aesthetic appeal */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 1.5rem;
+    background-color: #262421;
+    border-radius: 10px;
   }
+}
+.puzzle-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: min(75vh, 95vw);
+  margin-bottom: 1rem;
+}
+
+.action-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  background-color: #4a4a4a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.action-button:hover {
+  background: #70583b;
+}
+
+.action-button:active {
+  transform: translateY(2px);
+}
+
+.action-button:disabled {
+  background-color: #cccccc;
+  color: #634747;
+  cursor: not-allowed;
 }
