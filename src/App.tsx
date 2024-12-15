@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { useState } from "react";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import { isMobile, BrowserView, MobileView } from "react-device-detect";
 import PuzzlePage from "./views/PuzzlePage/PuzzlePage";
@@ -32,7 +32,7 @@ const App: React.FC = () => {
           <div className="nav-left">
             <div className="logo">
               <Link to="/" onClick={closeMobileMenu} {...touchProps}>
-                ♟ WorstMovePossible.com
+                ♟ WorstMovePossible.com 222
                 <span className="logo-beta-badge">BETA</span>
               </Link>
             </div>
