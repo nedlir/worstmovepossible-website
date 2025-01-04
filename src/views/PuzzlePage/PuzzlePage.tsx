@@ -1,6 +1,6 @@
 import React from "react";
 import PuzzleComponent from "../../components/PuzzleComponent/PuzzleComponent";
-import { puzzles } from "../../data/puzzles";
+import puzzles from "../../data/puzzles.json";
 
 const PuzzlePage: React.FC = () => {
   return (
