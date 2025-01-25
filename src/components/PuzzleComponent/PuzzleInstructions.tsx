@@ -1,19 +1,18 @@
 import React from "react";
 import { Puzzle } from "../../Puzzle";
-import SolutionMessage from "../SolutionMessage/SolutionMessage"; // Import the SolutionMessage component
+import SolutionMessage from "../SolutionMessage/SolutionMessage";
 import QueenIcon from "../../assets/Icons/QueenIcon";
 
 type PuzzleInstructionsProps = {
-  currentPuzzle: Puzzle;
+  puzzle: Puzzle;
   isSolved: boolean;
 };
 
 const PuzzleInstructions: React.FC<PuzzleInstructionsProps> = ({
-  currentPuzzle,
+  puzzle,
   isSolved,
 }) => {
-  const activeColor = currentPuzzle.fen.split(" ")[1]; // The second part of the FEN string indicates the active color
-
+  const activeColor = puzzle.fen.split(" ")[1]; // The second part of the FEN string indicates the active color
   const whoseMove = activeColor === "w" ? "White" : "Black";
 
   return (
@@ -32,7 +31,7 @@ const PuzzleInstructions: React.FC<PuzzleInstructionsProps> = ({
           </div>
         </div>
       ) : (
-        <SolutionMessage description={currentPuzzle.description} />
+        <SolutionMessage description={puzzle.description} />
       )}
     </div>
   );

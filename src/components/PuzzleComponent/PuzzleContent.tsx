@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ChessPuzzle } from "@react-chess-tools/react-chess-puzzle";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
@@ -6,7 +6,7 @@ import { Puzzle } from "../../Puzzle";
 import PuzzleActions from "./PuzzleActions";
 
 type PuzzleContentProps = {
-  currentPuzzle: Puzzle;
+  puzzle: Puzzle;
   resetKey: number;
   isSolved: boolean;
   onReset: () => void;
@@ -14,7 +14,7 @@ type PuzzleContentProps = {
 };
 
 const PuzzleContent: React.FC<PuzzleContentProps> = ({
-  currentPuzzle,
+  puzzle,
   resetKey,
   isSolved,
   onReset,
@@ -30,12 +30,9 @@ const PuzzleContent: React.FC<PuzzleContentProps> = ({
     if (isPlayingSequence) return;
     setIsPlayingSequence(true);
     setShowingSequence(true);
-    const game = new Chess(currentPuzzle.fen);
+    const game = new Chess(puzzle.fen);
     setSequenceGame(game);
-    const moves = [
-      ...(currentPuzzle.moves || []),
-      ...(currentPuzzle.move_sequence || []),
-    ];
+    const moves = [...(puzzle.moves || []), ...(puzzle.move_sequence || [])];
     for (const move of moves) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       game.move(move);
@@ -51,21 +48,17 @@ const PuzzleContent: React.FC<PuzzleContentProps> = ({
     onReset();
   };
 
-  useEffect(() => {
-    handleReset();
-  }, [currentPuzzle.id]);
-
   const sequenceState = {
     isPlaying: isPlayingSequence,
     isShowing: showingSequence,
-    hasSequence: !!(currentPuzzle.move_sequence || currentPuzzle.moves),
+    hasSequence: !!(puzzle.move_sequence || puzzle.moves),
   };
 
   return (
     <div className="puzzle-content">
       <ChessPuzzle.Root
-        key={`${currentPuzzle.id}-${resetKey}`}
-        puzzle={currentPuzzle}
+        key={`${puzzle.id}-${resetKey}`}
+        puzzle={puzzle}
         onSolve={onSolve}
       >
         <PuzzleActions
@@ -77,9 +70,7 @@ const PuzzleContent: React.FC<PuzzleContentProps> = ({
           {showingSequence && sequenceGame ? (
             <Chessboard
               position={sequenceGame.fen()}
-              boardOrientation={
-                shouldFlipBoard(currentPuzzle.fen) ? "black" : "white"
-              }
+              boardOrientation={shouldFlipBoard(puzzle.fen) ? "black" : "white"}
             />
           ) : (
             <ChessPuzzle.Board />
