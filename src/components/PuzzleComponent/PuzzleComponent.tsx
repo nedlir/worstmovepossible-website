@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Puzzle } from "../../Puzzle";
-import PuzzleComponentSidebar from "./PuzzleSidebar";
-import PuzzleComponentContent from "./PuzzleContent";
 import PuzzleInstructions from "./PuzzleInstructions";
+import PuzzleSidebar from "./PuzzleSidebar";
+import { usePuzzleHistory } from "../../PuzzleHistoryContext";
+import PuzzleContent from "./PuzzleContent";
 
 type PuzzleComponentProps = {
   puzzle: Puzzle;
@@ -12,48 +13,27 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzle }) => {
   const [resetKey, setResetKey] = useState(0);
   const [isSolved, setIsSolved] = useState(false);
   const [attempts, setAttempts] = useState(0);
-  const [isPlayingSequence, setIsPlayingSequence] = useState(false);
-  const [showingSequence, setShowingSequence] = useState(false);
+  const { addPuzzle } = usePuzzleHistory();
 
-  const handleReset = () => {
-    setResetKey((prev) => prev + 1);
-    setIsSolved(false);
-    setAttempts((prev) => prev + 1);
-    setIsPlayingSequence(false);
-    setShowingSequence(false);
-  };
-
-  const sequenceState = {
-    isPlaying: isPlayingSequence,
-    isShowing: showingSequence,
-    hasSequence: !!(puzzle.move_sequence || puzzle.moves),
-  };
-
-  const handlers = {
-    onReset: handleReset,
-    onPlaySequence: () => {
-      setIsPlayingSequence(true);
-      setShowingSequence(true);
-    },
-  };
+  useEffect(() => {
+    if (isSolved) {
+      addPuzzle(puzzle.id);
+    }
+  }, [isSolved, puzzle.id, addPuzzle]);
 
   return (
     <div className="puzzle-component">
       <div className="puzzle-container">
         <PuzzleInstructions puzzle={puzzle} isSolved={isSolved} />
-        <PuzzleComponentContent
+        <PuzzleContent
           puzzle={puzzle}
           resetKey={resetKey}
           isSolved={isSolved}
-          onReset={handleReset}
-          onSolve={() => setIsSolved(true)}
+          setIsSolved={setIsSolved}
+          setResetKey={setResetKey}
+          setAttempts={setAttempts}
         />
-        <PuzzleComponentSidebar
-          puzzle={puzzle}
-          attempts={attempts}
-          sequenceState={sequenceState}
-          handlers={handlers}
-        />
+        <PuzzleSidebar puzzle={puzzle} isSolved={isSolved} />
       </div>
     </div>
   );

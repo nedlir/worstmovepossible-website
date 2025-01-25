@@ -1,3 +1,4 @@
+// PuzzleContent.tsx
 import React, { useState } from "react";
 import { ChessPuzzle } from "@react-chess-tools/react-chess-puzzle";
 import { Chessboard } from "react-chessboard";
@@ -9,22 +10,33 @@ type PuzzleContentProps = {
   puzzle: Puzzle;
   resetKey: number;
   isSolved: boolean;
-  onReset: () => void;
-  onSolve: () => void;
+  setIsSolved: (solved: boolean) => void;
+  setResetKey: (fn: (prev: number) => number) => void;
+  setAttempts: (fn: (prev: number) => number) => void;
 };
 
 const PuzzleContent: React.FC<PuzzleContentProps> = ({
   puzzle,
   resetKey,
   isSolved,
-  onReset,
-  onSolve,
+  setIsSolved,
+  setResetKey,
+  setAttempts,
 }) => {
   const [isPlayingSequence, setIsPlayingSequence] = useState(false);
   const [sequenceGame, setSequenceGame] = useState<Chess | null>(null);
   const [showingSequence, setShowingSequence] = useState(false);
 
   const shouldFlipBoard = (fen: string): boolean => fen.split(" ")[1] === "b";
+
+  const handleReset = () => {
+    setResetKey((prev) => prev + 1);
+    setIsSolved(false);
+    setAttempts((prev) => prev + 1);
+    setIsPlayingSequence(false);
+    setSequenceGame(null);
+    setShowingSequence(false);
+  };
 
   const playSequence = async () => {
     if (isPlayingSequence) return;
@@ -41,13 +53,6 @@ const PuzzleContent: React.FC<PuzzleContentProps> = ({
     setIsPlayingSequence(false);
   };
 
-  const handleReset = () => {
-    setIsPlayingSequence(false);
-    setSequenceGame(null);
-    setShowingSequence(false);
-    onReset();
-  };
-
   const sequenceState = {
     isPlaying: isPlayingSequence,
     isShowing: showingSequence,
@@ -59,7 +64,7 @@ const PuzzleContent: React.FC<PuzzleContentProps> = ({
       <ChessPuzzle.Root
         key={`${puzzle.id}-${resetKey}`}
         puzzle={puzzle}
-        onSolve={onSolve}
+        onSolve={() => setIsSolved(true)}
       >
         <PuzzleActions
           sequenceState={sequenceState}

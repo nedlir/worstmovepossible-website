@@ -1,40 +1,63 @@
 import React from "react";
 import { Puzzle } from "../../Puzzle";
 import { PreviousIcon, NextIcon } from "../../assets/Icons";
+import { usePuzzleHistory } from "../../PuzzleHistoryContext";
+import puzzles from "../../data/puzzles.json";
+import { useNavigate } from "react-router-dom";
 
 type PuzzleSidebarProps = {
   puzzle: Puzzle;
-  attempts: number;
   isSolved: boolean;
-  onPrevious: () => void;
-  onNext: () => void;
 };
 
-const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({
-  puzzle,
-  attempts,
-  isSolved,
-  onPrevious,
-  onNext,
-}) => (
-  <div className="puzzle-sidebar">
-    <div className="puzzle-info">
-      <h3>Puzzle #{puzzle.id}</h3>
-      <div className="puzzle-stats">
-        <span>Attempts: {attempts}</span>
+const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({ puzzle, isSolved }) => {
+  const { solvedPuzzles, resetHistory } = usePuzzleHistory();
+  const navigate = useNavigate();
+
+  const currentIndex = solvedPuzzles.indexOf(puzzle.id);
+  const isFirstPuzzle = currentIndex === 0;
+  const isLastPuzzle = currentIndex === solvedPuzzles.length - 1;
+
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      const previousPuzzleId = solvedPuzzles[currentIndex - 1];
+      navigate(`/puzzles/${previousPuzzleId}`);
+    }
+  };
+
+  const handleNext = () => {
+    if (solvedPuzzles.length === puzzles.length) {
+      resetHistory();
+    }
+    navigate("/puzzles/");
+  };
+
+  return (
+    <div className="puzzle-sidebar">
+      <div className="puzzle-info">
+        <h3>Puzzle #{puzzle.id}</h3>
+        <div className="puzzle-stats">
+          <span>
+            Solved: {solvedPuzzles.length}/{puzzles.length}
+          </span>
+        </div>
       </div>
+      {isSolved && (
+        <div className="puzzle-controls">
+          {!isFirstPuzzle && (
+            <button className="control-button" onClick={handlePrevious}>
+              <PreviousIcon /> Previous
+            </button>
+          )}
+          {isLastPuzzle && (
+            <button className="control-button" onClick={handleNext}>
+              Next <NextIcon />
+            </button>
+          )}
+        </div>
+      )}
     </div>
-    {isSolved && (
-      <div className="puzzle-controls">
-        <button className="control-button" onClick={onPrevious}>
-          <PreviousIcon /> Previous
-        </button>
-        <button className="control-button" onClick={onNext}>
-          Next <NextIcon />
-        </button>
-      </div>
-    )}
-  </div>
-);
+  );
+};
 
 export default PuzzleSidebar;
