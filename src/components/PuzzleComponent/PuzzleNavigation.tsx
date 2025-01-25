@@ -5,13 +5,13 @@ import { usePuzzleHistory } from "../../PuzzleHistoryContext";
 import puzzles from "../../data/puzzles.json";
 import { useNavigate } from "react-router-dom";
 
-type PuzzleSidebarProps = {
+type PuzzleNavigationProps = {
   puzzle: Puzzle;
   isSolved: boolean;
   attempts: number;
 };
 
-const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({
+const PuzzleNavigation: React.FC<PuzzleNavigationProps> = ({
   puzzle,
   isSolved,
   attempts,
@@ -64,4 +64,4 @@ const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({
   );
 };
 
-export default PuzzleSidebar;
+export default PuzzleNavigation;

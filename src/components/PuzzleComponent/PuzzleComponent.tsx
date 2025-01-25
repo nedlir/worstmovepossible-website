@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Puzzle } from "../../Puzzle";
 import PuzzleInstructions from "./PuzzleInstructions";
-import PuzzleSidebar from "./PuzzleSidebar";
+import PuzzleNavigation from "./PuzzleNavigation";
 import { usePuzzleHistory } from "../../PuzzleHistoryContext";
 import PuzzleContent from "./PuzzleContent";
 
@@ -33,7 +33,11 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzle }) => {
           setResetKey={setResetKey}
           setAttempts={setAttempts}
         />
-        <PuzzleSidebar puzzle={puzzle} isSolved={isSolved} />
+        <PuzzleNavigation
+          puzzle={puzzle}
+          isSolved={isSolved}
+          attempts={attempts}
+        />
       </div>
     </div>
   );
