@@ -1,4 +1,3 @@
-// PuzzleContent.tsx
 import React, { useState } from "react";
 import { ChessPuzzle } from "@react-chess-tools/react-chess-puzzle";
 import { Chessboard } from "react-chessboard";

@@ -8,9 +8,14 @@ import { useNavigate } from "react-router-dom";
 type PuzzleSidebarProps = {
   puzzle: Puzzle;
   isSolved: boolean;
+  attempts: number;
 };
 
-const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({ puzzle, isSolved }) => {
+const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({
+  puzzle,
+  isSolved,
+  attempts,
+}) => {
   const { solvedPuzzles, resetHistory } = usePuzzleHistory();
   const navigate = useNavigate();
 
@@ -40,22 +45,21 @@ const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({ puzzle, isSolved }) => {
           <span>
             Solved: {solvedPuzzles.length}/{puzzles.length}
           </span>
+          <span> attempts: {attempts}</span>
         </div>
       </div>
-      {isSolved && (
-        <div className="puzzle-controls">
-          {!isFirstPuzzle && (
-            <button className="control-button" onClick={handlePrevious}>
-              <PreviousIcon /> Previous
-            </button>
-          )}
-          {isLastPuzzle && (
-            <button className="control-button" onClick={handleNext}>
-              Next <NextIcon />
-            </button>
-          )}
-        </div>
-      )}
+      <div className="puzzle-controls">
+        {!isFirstPuzzle && (
+          <button className="control-button" onClick={handlePrevious}>
+            <PreviousIcon /> Previous
+          </button>
+        )}
+        {isLastPuzzle && (
+          <button className="control-button" onClick={handleNext}>
+            Next <NextIcon />
+          </button>
+        )}
+      </div>
     </div>
   );
 };
