@@ -212,3 +212,35 @@
   color: #634747;
   cursor: not-allowed;
 }
+
+.puzzle-instructions {
+  width: 350px;
+  position: sticky;
+  top: calc(var(--nav-height) + 1rem);
+  margin-left: auto;
+  height: fit-content;
+  margin-top: 0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  background-color: #262421;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.instructions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.instructions-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.instructions-text {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 500;
+  color: #ffffff;
+}

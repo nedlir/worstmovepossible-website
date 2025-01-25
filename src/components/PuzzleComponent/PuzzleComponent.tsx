@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Puzzle } from "../../Puzzle";
 import PuzzleComponentSidebar from "./PuzzleSidebar";
 import PuzzleComponentContent from "./PuzzleContent";
+import PuzzleInstructions from "./PuzzleInstructions";
 
 type PuzzleComponentProps = {
   puzzles: Puzzle[];
@@ -50,6 +51,7 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzles }) => {
   return (
     <div className="puzzle-component">
       <div className="puzzle-container">
+        <PuzzleInstructions currentPuzzle={currentPuzzle} isSolved={isSolved} />
         <PuzzleComponentContent
           currentPuzzle={currentPuzzle}
           resetKey={resetKey}
@@ -64,7 +66,6 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzles }) => {
           onNext={() => changePuzzle(1)}
           sequenceState={sequenceState}
           handlers={handlers}
-          isSolved={isSolved}
         />
       </div>
     </div>

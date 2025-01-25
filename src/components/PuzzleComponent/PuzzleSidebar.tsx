@@ -1,14 +1,12 @@
 import React from "react";
 import { Puzzle } from "../../Puzzle";
 import { PreviousIcon, NextIcon } from "../../assets/Icons";
-import SolutionMessage from "../SolutionMessage/SolutionMessage";
 
 type PuzzleSidebarProps = {
   currentPuzzle: Puzzle;
   attempts: number;
   onPrevious: () => void;
   onNext: () => void;
-  isSolved: boolean;
   sequenceState: {
     isPlaying: boolean;
     isShowing: boolean;
@@ -25,7 +23,6 @@ const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({
   attempts,
   onPrevious,
   onNext,
-  isSolved,
 }) => (
   <div className="puzzle-sidebar">
     <div className="puzzle-info">
@@ -42,7 +39,6 @@ const PuzzleSidebar: React.FC<PuzzleSidebarProps> = ({
         Next <NextIcon />
       </button>
     </div>
-    {isSolved && <SolutionMessage description={currentPuzzle.description} />}
   </div>
 );
 
