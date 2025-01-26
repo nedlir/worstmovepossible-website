@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PuzzleInstructions from "./PuzzleInstructions";
 import PuzzleNavigation from "./PuzzleNavigation";
 import PuzzleContent from "./PuzzleContent";
 import { usePuzzleStore } from "../../stores/puzzleStore";
 import { Puzzle } from "../../Puzzle";
+import SolutionMessage from "../SolutionMessage/SolutionMessage";
 
 type PuzzleComponentProps = {
   puzzle: Puzzle;
@@ -38,7 +39,11 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({
           setAttempts={setAttempts}
         />
         <div className="puzzle-sidebar">
-          <PuzzleInstructions puzzle={puzzle} isSolved={isSolved} />
+          {isSolved ? (
+            <SolutionMessage description={puzzle.description} />
+          ) : (
+            <PuzzleInstructions puzzle={puzzle} />
+          )}
           <PuzzleNavigation
             puzzle={puzzle}
             isSolved={isSolved}
