@@ -8,10 +8,12 @@ type SolutionMessageProps = {
 const SolutionMessage: React.FC<SolutionMessageProps> = ({ description }) => (
   <div className="solution-message">
     <div className="solution-header">
-      <CheckmarkIcon />
+      <div className="solution-icon">
+        <CheckmarkIcon width={20} height={20} />
+      </div>
       <span className="solution-title">Puzzle Solved!</span>
     </div>
-    {description}
+    <span className="solution-description">{description}</span>
   </div>
 );
 
