@@ -17,6 +17,20 @@
   align-items: center;
 }
 
+.puzzle-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Added common width control */
+.puzzle-instructions,
+.puzzle-navigation {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .board-and-actions {
   display: flex;
   flex-direction: column;
@@ -47,9 +61,7 @@
   margin-bottom: 1rem;
 }
 
-.puzzle-sidebar {
-  width: 100%;
-  max-width: min(75vh, 95vw);
+.puzzle-navigation {
   padding: 1rem;
   background-color: #262421;
   border-radius: 8px;
@@ -59,12 +71,11 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  box-sizing: border-box;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-.puzzle-sidebar::-webkit-scrollbar {
+.puzzle-navigation::-webkit-scrollbar {
   display: none;
 }
 
@@ -85,13 +96,21 @@
   transition: background 0.2s ease, transform 0.1s ease;
 }
 
-.control-button:hover,
-.action-button:hover {
+.control-button:disabled,
+.action-button:disabled {
+  background-color: #cccccc;
+  color: #634747;
+  cursor: not-allowed;
+  border: 1px solid #999999;
+}
+
+.control-button:hover:not(:disabled),
+.action-button:hover:not(:disabled) {
   background: #70583b;
 }
 
-.control-button:active,
-.action-button:active {
+.control-button:active:not(:disabled),
+.action-button:active:not(:disabled) {
   transform: translateY(2px);
 }
 
@@ -104,14 +123,26 @@
 
 .solution-message {
   background-color: #43b581;
-  color: white;
+  color: #fff;
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
   animation: fadeInUp 0.2s ease-out;
   font-size: 0.9rem;
   line-height: 1.2;
-  text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.solution-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.solution-title {
+  font-size: 1.17em;
+  font-weight: bold;
 }
 
 .puzzle-info {
@@ -121,7 +152,6 @@
 .puzzle-info h3 {
   font-size: clamp(1.125rem, 2.5vw, 1.25rem);
   font-weight: 600;
-  /* margin: 0 0 1rem 0; */
   color: #ffffff;
 }
 
@@ -153,33 +183,60 @@
   }
 }
 
+.puzzle-instructions {
+  height: fit-content;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  background-color: #262421;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.instructions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.instructions-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.instructions-text {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 500;
+  color: #ffffff;
+}
+
 @media (min-width: 1200px) {
   .puzzle-container {
     flex-direction: row;
-    align-items: stretch;
-    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
   .puzzle-content {
     flex: 1;
-    max-width: calc(100% - 350px);
-    min-width: 600px;
-    margin-right: 1rem;
+    max-width: calc(100% - 366px);
+    margin-right: 0;
   }
 
   .puzzle-sidebar {
     width: 350px;
+    min-width: 350px;
     position: sticky;
     top: calc(var(--nav-height) + 1rem);
-    margin-left: auto;
-    height: 100%;
-    max-height: 100%;
-    margin-top: 0;
+    height: calc(100vh - var(--nav-height) - 2rem);
     overflow-y: auto;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    padding: 1rem;
-    background-color: #262421;
-    border-radius: 10px;
+  }
+
+  /* Ensure identical width enforcement */
+  .puzzle-instructions,
+  .puzzle-navigation {
+    min-width: 350px;
+    width: 100%;
   }
 }
 
@@ -211,36 +268,4 @@
   background-color: #cccccc;
   color: #634747;
   cursor: not-allowed;
-}
-
-.puzzle-instructions {
-  width: 350px;
-  position: sticky;
-  top: calc(var(--nav-height) + 1rem);
-  margin-left: auto;
-  height: fit-content;
-  margin-top: 0;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  padding: 1rem;
-  background-color: #262421;
-  border-radius: 10px;
-  color: #ffffff;
-}
-
-.instructions-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.instructions-content {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.instructions-text {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  font-weight: 500;
-  color: #ffffff;
 }

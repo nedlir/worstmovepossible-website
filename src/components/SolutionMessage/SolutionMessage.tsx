@@ -1,4 +1,5 @@
 import React from "react";
+import CheckmarkIcon from "../../assets/Icons/CheckmarkIcon";
 
 type SolutionMessageProps = {
   description: string;
@@ -6,10 +7,10 @@ type SolutionMessageProps = {
 
 const SolutionMessage: React.FC<SolutionMessageProps> = ({ description }) => (
   <div className="solution-message">
-    <svg viewBox="0 0 24 24" width="24" height="24">
-      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-    </svg>
-    <h3>Puzzle Solved!</h3>
+    <div className="solution-header">
+      <CheckmarkIcon />
+      <span className="solution-title">Puzzle Solved!</span>
+    </div>
     {description}
   </div>
 );

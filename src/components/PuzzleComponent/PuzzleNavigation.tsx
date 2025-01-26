@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { PreviousIcon, NextIcon } from "../../assets/Icons";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { NextIcon } from "../../assets/Icons";
+import { useNavigate } from "react-router-dom";
 import { usePuzzleStore } from "../../stores/puzzleStore";
 import { Puzzle } from "../../Puzzle";
 
@@ -15,36 +15,22 @@ const PuzzleNavigation: React.FC<PuzzleNavigationProps> = ({
   isSolved,
   attempts,
 }) => {
-  const { solvedPuzzles, unsolvedPuzzles } = usePuzzleStore();
-  const navigate: NavigateFunction = useNavigate();
+  const { solvedPuzzles, unsolvedPuzzles, solvePuzzle } = usePuzzleStore();
+  const navigate = useNavigate();
 
-  const currentIndex: number = solvedPuzzles.indexOf(puzzle.id);
-  const isFirstPuzzle: boolean = solvedPuzzles.length === 0;
-  const isLastPuzzle: boolean = unsolvedPuzzles.size === 0;
-
+  // Automatically move solved puzzles from unsolved to solved
   useEffect(() => {
-    console.log("solvedPuzzles", solvedPuzzles);
-    console.log("unsolvedPuzzles", unsolvedPuzzles);
-    console.log("currentIndex", currentIndex);
-  }, [solvedPuzzles, unsolvedPuzzles, currentIndex]);
-
-  const handlePrevious = () => {
-    if (currentIndex < 0) return;
-    if (isFirstPuzzle) return;
-    if (solvedPuzzles.length <= 1) return;
-
-    const previousPuzzleId: string = solvedPuzzles[currentIndex - 1];
-    if (isSolved && previousPuzzleId) {
-      navigate(`/puzzles/${previousPuzzleId}`);
+    if (isSolved && !solvedPuzzles.includes(puzzle.id)) {
+      solvePuzzle(puzzle.id); // Use the correct action name from your store
     }
-  };
+  }, [isSolved, puzzle.id, solvedPuzzles, solvePuzzle]);
 
   const handleNext = () => {
     navigate("/puzzles/");
   };
 
   return (
-    <div className="puzzle-sidebar">
+    <div className="puzzle-navigation">
       <div className="puzzle-info">
         <h3>Puzzle #{puzzle.id}</h3>
         <div className="puzzle-stats">
@@ -56,13 +42,12 @@ const PuzzleNavigation: React.FC<PuzzleNavigationProps> = ({
         </div>
       </div>
       <div className="puzzle-controls">
-        {!isFirstPuzzle && solvedPuzzles.length > 0 && (
-          <button className="control-button" onClick={handlePrevious}>
-            <PreviousIcon /> Previous
-          </button>
-        )}
-        {!isLastPuzzle && isSolved && (
-          <button className="control-button" onClick={handleNext}>
+        {unsolvedPuzzles.size > 0 && (
+          <button
+            className="control-button"
+            onClick={handleNext}
+            disabled={!isSolved}
+          >
             Next <NextIcon />
           </button>
         )}

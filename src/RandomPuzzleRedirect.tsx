@@ -12,7 +12,10 @@ export const RandomPuzzleRedirect: React.FC = () => {
       return;
     }
 
-    const randomId = Array.from(unsolvedPuzzles).pop();
+    const unsolvedArray = Array.from(unsolvedPuzzles);
+    const randomIndex = Math.floor(Math.random() * unsolvedArray.length);
+    const randomId = unsolvedArray[randomIndex];
+
     navigate(`/puzzles/${randomId}`);
   }, [navigate, unsolvedPuzzles]);
 

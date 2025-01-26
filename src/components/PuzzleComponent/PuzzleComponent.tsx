@@ -29,7 +29,6 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({
   return (
     <div className="puzzle-component">
       <div className="puzzle-container">
-        <PuzzleInstructions puzzle={puzzle} isSolved={isSolved} />
         <PuzzleContent
           puzzle={puzzle}
           resetKey={resetKey}
@@ -38,11 +37,14 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({
           setResetKey={setResetKey}
           setAttempts={setAttempts}
         />
-        <PuzzleNavigation
-          puzzle={puzzle}
-          isSolved={isSolved}
-          attempts={attempts}
-        />
+        <div className="puzzle-sidebar">
+          <PuzzleInstructions puzzle={puzzle} isSolved={isSolved} />
+          <PuzzleNavigation
+            puzzle={puzzle}
+            isSolved={isSolved}
+            attempts={attempts}
+          />
+        </div>
       </div>
     </div>
   );
