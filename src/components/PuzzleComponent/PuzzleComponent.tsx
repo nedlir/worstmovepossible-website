@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Puzzle } from "../../Puzzle";
 import PuzzleInstructions from "./PuzzleInstructions";
 import PuzzleNavigation from "./PuzzleNavigation";
-import { usePuzzleHistory } from "../../PuzzleHistoryContext";
 import PuzzleContent from "./PuzzleContent";
+import { usePuzzleStore } from "../../stores/puzzleStore";
+import { Puzzle } from "../../Puzzle";
 
 type PuzzleComponentProps = {
   puzzle: Puzzle;
+  onSolve: () => void;
 };
 
-const PuzzleComponent: React.FC<PuzzleComponentProps> = ({ puzzle }) => {
+const PuzzleComponent: React.FC<PuzzleComponentProps> = ({
+  puzzle,
+  onSolve,
+}) => {
   const [resetKey, setResetKey] = useState(0);
   const [isSolved, setIsSolved] = useState(false);
   const [attempts, setAttempts] = useState(0);
-  const { addPuzzle } = usePuzzleHistory();
+  const { solvePuzzle } = usePuzzleStore();
 
   useEffect(() => {
     if (isSolved) {
-      addPuzzle(puzzle.id);
+      solvePuzzle(puzzle.id);
+      onSolve();
     }
-  }, [isSolved, puzzle.id, addPuzzle]);
+  }, [isSolved, puzzle.id, solvePuzzle, onSolve]);
 
   return (
     <div className="puzzle-component">
