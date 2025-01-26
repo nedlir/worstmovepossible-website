@@ -14,13 +14,16 @@ const PuzzleInstructions: React.FC<PuzzleInstructionsProps> = ({ puzzle }) => {
     <div className="puzzle-instructions">
       <div className="instructions-container">
         <div className="instructions-content">
-          <QueenIcon
-            width={24}
-            height={24}
-            color={activeColor === "w" ? "white" : "black"}
-          />
           <span className="instructions-text">
-            Your turn. Find the WORST move for {whoseMove.toLowerCase()}.
+            <QueenIcon
+              width={24}
+              height={24}
+              color={activeColor === "w" ? "white" : "black"}
+            />{" "}
+            Your turn.
+            <br />
+            Find the <span className="instructions-text-worst">worst</span> move
+            for {whoseMove.toLowerCase()}.
           </span>
         </div>
       </div>
