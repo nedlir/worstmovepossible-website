@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import PuzzleInstructions from "./PuzzleInstructions";
 import PuzzleNavigation from "./PuzzleNavigation";
 import PuzzleContent from "./PuzzleContent";
@@ -19,6 +20,7 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({
   const [isSolved, setIsSolved] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const { solvePuzzle } = usePuzzleStore();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   useEffect(() => {
     if (isSolved) {
@@ -38,7 +40,7 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({
           setResetKey={setResetKey}
           setAttempts={setAttempts}
         />
-        <div className="puzzle-sidebar">
+        <div className={`puzzle-sidebar ${isMobile ? "mobile" : ""}`}>
           {isSolved ? (
             <SolutionMessage description={puzzle.description} />
           ) : (

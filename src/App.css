@@ -152,3 +152,41 @@ body {
   margin-left: 0.5rem;
   animation: epicPulse 3s infinite;
 }
+
+:root {
+  --board-size: min(calc(100vw - 2rem), 400px);
+  --puzzle-container-padding: 0.5rem;
+  --max-puzzle-width: 95vw;
+  --mobile-breakpoint: 768px;
+}
+
+.main-content {
+  padding: 1rem;
+  margin-top: var(--nav-height);
+  max-width: var(--max-puzzle-width);
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0 0.5rem;
+  }
+
+  .logo a {
+    font-size: 1rem;
+  }
+
+  .main-content {
+    padding: 0.5rem;
+    max-width: 100vw;
+  }
+}
+
+.mobile-nav {
+  top: var(--nav-height);
+  padding: 0.5rem;
+}
+
+.mobile-nav a {
+  padding: 0.5rem;
+  font-size: 1rem;
+}

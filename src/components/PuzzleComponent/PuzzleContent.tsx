@@ -52,12 +52,6 @@ const PuzzleContent: React.FC<PuzzleContentProps> = ({
     setIsPlayingSequence(false);
   };
 
-  const sequenceState = {
-    isPlaying: isPlayingSequence,
-    isShowing: showingSequence,
-    hasSequence: !!(puzzle.move_sequence || puzzle.moves),
-  };
-
   return (
     <div className="puzzle-content">
       <ChessPuzzle.Root
@@ -66,7 +60,11 @@ const PuzzleContent: React.FC<PuzzleContentProps> = ({
         onSolve={() => setIsSolved(true)}
       >
         <PuzzleActions
-          sequenceState={sequenceState}
+          sequenceState={{
+            isPlaying: isPlayingSequence,
+            isShowing: showingSequence,
+            hasSequence: !!(puzzle.move_sequence || puzzle.moves),
+          }}
           handlers={{ onReset: handleReset, onPlaySequence: playSequence }}
           isSolved={isSolved}
         />
