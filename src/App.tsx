@@ -10,14 +10,19 @@ import { RandomPuzzleRedirect } from "./RandomPuzzleRedirect";
 const App: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   const touchProps = {
     role: "button",
     tabIndex: 0,
-    onTouchStart: (e: React.TouchEvent) => e.preventDefault(),
-    style: { touchAction: "manipulation" },
+    onTouchStart: () => {},
+    style: { touchAction: "manipulation" as const },
   };
 
   return (
@@ -57,10 +62,10 @@ const App: React.FC = () => {
         <main className="main-content">
           <Routes>
             <Route path="/puzzles/:puzzleId" element={<PuzzlePage />} />
-            <Route path="/puzzles/" element={<RandomPuzzleRedirect />} />
+            <Route path="/puzzles/" element={<RandomPuzzleRedirect />} />{" "}
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contribute" element={<ContributePage />} />
-            <Route path="/" element={<RandomPuzzleRedirect />} />
+            <Route path="/" element={<RandomPuzzleRedirect />} />{" "}
           </Routes>
         </main>
       </div>
