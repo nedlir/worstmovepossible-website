@@ -308,7 +308,7 @@
     height: calc(100vh - var(--nav-height) - 2rem);
     overflow-y: auto;
   }
-
+  /* nothin */
   /* Ensure identical width enforcement */
   .puzzle-instructions,
   .puzzle-navigation {
