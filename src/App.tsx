@@ -3,8 +3,8 @@ import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import PuzzlePage from "./views/PuzzlePage/PuzzlePage";
 import AboutPage from "./views/AboutPage/AboutPage";
 import ContributePage from "./views/ContributePage/ContributePage";
-import "./App.css";
-import "./Components.css";
+import "./app.css";
+import "./components.css";
 import { RandomPuzzleRedirect } from "./RandomPuzzleRedirect";
 
 const App: React.FC = () => {
