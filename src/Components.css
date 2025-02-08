@@ -39,26 +39,6 @@
     gap: 0.25rem;
     width: 100%;
 
-    .share-container {
-      margin-top: 1rem;
-      padding: 1rem;
-      background-color: #262421;
-      border-radius: 8px;
-    }
-
-    .share-buttons {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .share-container h3 {
-      margin: 0 0 0.75rem 0;
-      font-size: 1.1rem;
-      color: var(--text-color);
-    }
-
     .puzzle-instructions,
     .puzzle-navigation {
       width: 100%;
@@ -110,6 +90,9 @@
     }
 
     .puzzle-navigation {
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: column;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       overflow-y: auto;
       scrollbar-width: none;
@@ -301,5 +284,116 @@
       margin: 0.5rem;
       padding: 0.75rem;
     }
+  }
+}
+/* Share Component Styles */
+.share-container {
+  background: var(--secondary-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.share-container h3 {
+  font-size: clamp(1rem, 2.5dvw, 1.25rem);
+  margin: 8px;
+  color: var(--text-color);
+  text-align: center;
+  font-weight: 600;
+}
+
+.share-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.25rem;
+}
+
+.share-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.5rem;
+  border-radius: 6px;
+  font-size: clamp(0.65rem, 2dvw, 0.8rem);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  color: white;
+  min-height: 60px;
+  text-align: center;
+}
+
+.share-button span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.share-button svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Platform-specific colors */
+.share-button.facebook {
+  background: #1877f2;
+}
+.share-button.twitter {
+  background: #000000;
+}
+.share-button.linkedin {
+  background: #0a66c2;
+}
+.share-button.reddit {
+  background: #ff4500;
+}
+.share-button.whatsapp {
+  background: #25d366;
+}
+.share-button.telegram {
+  background: #26a5e4;
+}
+.share-button.discord {
+  background: #5865f2;
+}
+.share-button.copy {
+  background: var(--button-color);
+  color: var(--text-color);
+}
+
+/* Hover effects */
+.share-button:hover {
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .share-buttons {
+    gap: 0.25rem;
+  }
+
+  .share-button {
+    padding: 0.5rem;
+    min-height: 50px;
+    font-size: 0.6rem;
+  }
+
+  .share-button svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+  .share-container {
+    padding: 0.75rem;
+  }
+
+  .share-button {
+    font-size: 0.7rem;
   }
 }

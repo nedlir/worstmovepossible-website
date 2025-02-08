@@ -50,7 +50,7 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({
             isSolved={isSolved}
             attempts={attempts}
           />
-          <Share puzzleId={puzzle.id} />
+          {isSolved && <Share puzzleId={puzzle.id} />}
         </div>
       </div>
     </div>
