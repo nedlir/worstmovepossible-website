@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import PuzzlePage from "./views/PuzzlePage/PuzzlePage";
 import AboutPage from "./views/AboutPage/AboutPage";
@@ -8,6 +8,21 @@ import "./components.css";
 import { RandomPuzzleRedirect } from "./RandomPuzzleRedirect";
 
 const App: React.FC = () => {
+  // For the domain shenanigans
+  useEffect(() => {
+    if (window.self !== window.top) {
+      // Detect if framed
+      const existingMeta = document.querySelector('meta[name="viewport"]');
+      if (!existingMeta) {
+        const meta = document.createElement("meta");
+        meta.name = "viewport";
+        meta.content =
+          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
+        document.head.appendChild(meta);
+      }
+    }
+  }, []);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
