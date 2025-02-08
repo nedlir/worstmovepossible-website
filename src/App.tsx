@@ -22,6 +22,19 @@ const App: React.FC = () => {
       }
     }
   }, []);
+  useEffect(() => {
+    if (window.location.search.includes("mobile=1")) {
+      const meta = document.createElement("meta");
+      meta.name = "viewport";
+      meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0";
+      document.head.appendChild(meta);
+
+      // Force mobile styles
+      document.body.style.minWidth = "100%";
+      document.body.style.overflow = "auto";
+      document.body.style.position = "relative";
+    }
+  }, []);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
