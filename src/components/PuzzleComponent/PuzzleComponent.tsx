@@ -5,6 +5,7 @@ import PuzzleContent from "./PuzzleContent";
 import { usePuzzleStore } from "../../stores/puzzleStore";
 import { Puzzle } from "../../Puzzle";
 import SolutionMessage from "../SolutionMessage/SolutionMessage";
+import Share from "./Share";
 
 type PuzzleComponentProps = {
   puzzle: Puzzle;
@@ -49,6 +50,7 @@ const PuzzleComponent: React.FC<PuzzleComponentProps> = ({
             isSolved={isSolved}
             attempts={attempts}
           />
+          <Share puzzleId={puzzle.id} />
         </div>
       </div>
     </div>

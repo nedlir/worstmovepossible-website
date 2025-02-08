@@ -1,0 +1,1951 @@
+File Tree:
+- assets/
+- components/
+- data/
+- router/
+- stores/
+- views/
+- app.css
+- App.tsx
+- components.css
+- main.tsx
+- Puzzle.ts
+- RandomPuzzleRedirect.tsx
+- vite-env.d.ts
+  - Icons/
+    - CheckmarkIcon.tsx
+    - HintIcon.tsx
+    - index.ts
+    - NextIcon.tsx
+    - PlayIcon.tsx
+    - PreviousIcon.tsx
+    - QueenIcon.tsx
+    - ResetIcon.tsx
+  - PuzzleComponent/
+  - SolutionMessage/
+    - PuzzleActions.tsx
+    - PuzzleComponent.tsx
+    - PuzzleContent.tsx
+    - PuzzleInstructions.tsx
+    - PuzzleNavigation.tsx
+    - SolutionMessage.tsx
+  - puzzles.json
+  - puzzleStore.ts
+  - AboutPage/
+  - ContributePage/
+  - PuzzlePage/
+    - AboutPage.css
+    - AboutPage.tsx
+    - ContributePage.css
+    - ContributePage.tsx
+    - PuzzlePage.css
+    - PuzzlePage.tsx
+
+# app.css
+/* Root Variables */
+:root {
+  --primary-color: #36393f;
+  --secondary-color: #2f3136;
+  --tertiary-color: #202225;
+  --text-color: #dcddde;
+  --muted-color: #72767d;
+  --link-color: #00b0f4;
+  --green-color: #43b581;
+  --red-color: #f04747;
+  --button-color: #4f545c;
+  --button-hover-color: #5865f2;
+  --accent-color: #7289da;
+  --border-color: #40444b;
+  --nav-height: 56px;
+  --board-size: min(calc(100vw - 1.5rem), 400px);
+  --puzzle-container-padding: 0.25rem;
+  --max-puzzle-width: 80vw;
+}
+
+/* Global Styles */
+body {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* App Container */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navigation Bar */
+.nav-container {
+  background: var(--tertiary-color);
+  padding: 0 1rem;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Navigation Items */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.nav-divider {
+  display: none;
+}
+
+.nav-links {
+  display: none;
+}
+
+/* Main Content */
+.main-content {
+  /* flex: 1; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--puzzle-container-padding);
+  margin-top: var(--nav-height);
+  max-width: var(--max-puzzle-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  background: var(--tertiary-color);
+  padding: 1rem;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+
+.mobile-nav.open {
+  transform: translateY(0);
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 0.75rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+/* Desktop Overrides to Force Mobile Layout */
+@media (min-width: 768px) {
+  .nav-container {
+    height: var(--nav-height);
+    padding: 0 1rem;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .main-content {
+    margin-top: var(--nav-height);
+    max-width: var(--max-puzzle-width);
+  }
+}
+
+.logo-beta-badge {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+  animation: epicPulse 3s infinite;
+}
+@media (max-width: 767px) {
+  .main-content {
+    padding: 0;
+    max-width: 100vw;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .logo a {
+    font-size: 1rem;
+  }
+}
+
+:root {
+  --board-size: min(95vw, 400px);
+  --max-puzzle-width: 100vw;
+  --puzzle-container-padding: 0.5rem;
+}
+
+.main-content {
+  padding: 0.5rem;
+  margin: var(--nav-height) auto 0;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+.nav-container {
+  padding: 0 0.75rem;
+}
+
+.logo a {
+  font-size: 1rem;
+}
+
+.mobile-nav {
+  background: var(--tertiary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-nav a {
+  padding: 1rem 0.75rem;
+  font-size: 1rem;
+}
+
+
+# App.tsx
+import React, { useState } from "react";
+import { HashRouter, Routes, Route, Link } from "react-router-dom";
+import PuzzlePage from "./views/PuzzlePage/PuzzlePage";
+import AboutPage from "./views/AboutPage/AboutPage";
+import ContributePage from "./views/ContributePage/ContributePage";
+import "./app.css";
+import "./components.css";
+import { RandomPuzzleRedirect } from "./RandomPuzzleRedirect";
+
+const App: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  const touchProps = {
+    role: "button",
+    tabIndex: 0,
+    onTouchStart: () => {},
+    style: { touchAction: "manipulation" as const },
+  };
+
+  return (
+    <HashRouter>
+      <div className="app">
+        <nav className="nav-container">
+          <div className="nav-left">
+            <div className="logo">
+              <Link to="/" onClick={closeMobileMenu} {...touchProps}>
+                ♟ WorstMovePossible.com
+                <span className="logo-beta-badge">BETA</span>
+              </Link>
+            </div>
+            <button
+              className="mobile-menu-button"
+              onClick={toggleMobileMenu}
+              {...touchProps}
+              aria-label="Toggle menu"
+            >
+              ☰
+            </button>
+          </div>
+        </nav>
+
+        <div className={`mobile-nav ${isMobileMenuOpen ? "open" : ""}`}>
+          <Link to="/" onClick={closeMobileMenu} {...touchProps}>
+            Puzzles
+          </Link>
+          <Link to="/about" onClick={closeMobileMenu} {...touchProps}>
+            About
+          </Link>
+          <Link to="/contribute" onClick={closeMobileMenu} {...touchProps}>
+            Contribute
+          </Link>
+        </div>
+
+        <main className="main-content">
+          <Routes>
+            <Route path="/puzzles/:puzzleId" element={<PuzzlePage />} />
+            <Route path="/puzzles/" element={<RandomPuzzleRedirect />} />{" "}
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contribute" element={<ContributePage />} />
+            <Route path="/" element={<RandomPuzzleRedirect />} />{" "}
+          </Routes>
+        </main>
+      </div>
+    </HashRouter>
+  );
+};
+
+export default App;
+
+
+# components.css
+.puzzle-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  position: relative;
+  gap: 0.75rem;
+
+  .puzzle-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+
+    .board-container {
+      width: min(95vw, 75vh);
+      height: min(95vw, 75vh);
+      aspect-ratio: 1;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 0.5rem;
+    }
+
+    .puzzle-actions {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: min(75dvh, 95dvw);
+      justify-content: center;
+    }
+  }
+
+  .puzzle-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+
+    .puzzle-instructions,
+    .puzzle-navigation {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 1rem;
+      background-color: #262421;
+      border-radius: 8px;
+      color: #ffffff;
+
+      .instructions-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .instructions-content {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+
+          .instructions-text {
+            font-size: clamp(1rem, 2.5dvw, 1.25rem);
+            font-weight: 500;
+
+            .instructions-text-worst {
+              color: #ff4757;
+              text-shadow: 0 2px 4px rgba(255, 71, 87, 0.3);
+              position: relative;
+              display: inline-block;
+              transform-origin: center bottom;
+
+              &::after {
+                content: "";
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(
+                  90deg,
+                  transparent 0%,
+                  #ff4757 50%,
+                  transparent 100%
+                );
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .puzzle-navigation {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .puzzle-info h3 {
+        margin: 0;
+        font-size: clamp(1.125rem, 2.5dvw, 1.25rem);
+        font-weight: 600;
+      }
+
+      .puzzle-stats {
+        font-size: clamp(0.8rem, 2dvw, 0.9rem);
+        color: #9fa0a2;
+      }
+
+      .puzzle-controls {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+
+    .solution-message {
+      background-color: #345245;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      font-size: clamp(0.9rem, 2dvw, 1rem);
+      line-height: 1.4;
+      animation: fadeInUp 0.3s ease-out;
+
+      .solution-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.5rem;
+
+        .solution-icon {
+          background-color: #43b581;
+          border-radius: 6px;
+          padding: 0.25rem;
+          display: flex;
+          align-items: center;
+        }
+
+        .solution-title {
+          font-family: "Space Grotesk", sans-serif;
+          font-size: clamp(1.1rem, 2.5dvw, 1.25rem);
+          font-weight: 600;
+          letter-spacing: 0.25px;
+          position: relative;
+          color: #e8fff3;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(
+              90deg,
+              transparent 0%,
+              rgba(232, 255, 243, 0.8) 50%,
+              transparent 100%
+            );
+            animation: fadeInUnderline 0.8s ease-out forwards;
+          }
+        }
+      }
+
+      .solution-description {
+        font-weight: 500;
+        opacity: 0.9;
+        display: block;
+        line-height: 1.35;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+    flex-direction: row;
+    align-items: flex-start;
+
+    .puzzle-content {
+      flex: 1;
+      max-width: calc(100% - 366px);
+      margin-right: 0;
+    }
+
+    .puzzle-sidebar {
+      width: 350px;
+      min-width: 350px;
+      position: sticky;
+      top: calc(var(--nav-height) + 1rem);
+      height: calc(100dvh - var(--nav-height) - 2rem);
+
+      .puzzle-instructions,
+      .puzzle-navigation {
+        min-width: 350px;
+      }
+    }
+  }
+}
+
+.control-button,
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-size: clamp(1rem, 2.5dvw, 1.25rem);
+  background-color: #4a4a4a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  min-height: 44px;
+  width: 100%;
+
+  &:disabled {
+    background-color: #cccccc;
+    color: #634747;
+    cursor: not-allowed;
+    border: 1px solid #999999;
+  }
+
+  &:hover:not(:disabled) {
+    background: #70583b;
+  }
+  &:active:not(:disabled) {
+    transform: translateY(2px);
+  }
+
+  svg {
+    width: clamp(18px, 4dvw, 24px);
+    height: clamp(18px, 4dvw, 24px);
+    fill: currentColor;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUnderline {
+  from {
+    opacity: 0;
+    width: 0%;
+  }
+  to {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .puzzle-container {
+    .puzzle-sidebar {
+      width: 100%;
+
+      .puzzle-instructions,
+      .puzzle-navigation {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    .board-container {
+      width: 95dvw;
+      height: 95dvw;
+    }
+
+    .solution-message {
+      margin: 0.5rem;
+      padding: 0.75rem;
+    }
+  }
+}
+
+
+# main.tsx
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+
+
+# Puzzle.ts
+export type Puzzle = {
+  id: string;
+  fen: string;
+  moves: string[];
+  makeFirstMove?: boolean;
+  move_sequence?: string[];
+  description: string;
+};
+
+
+# RandomPuzzleRedirect.tsx
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { usePuzzleStore } from "./stores/puzzleStore";
+
+export const RandomPuzzleRedirect: React.FC = () => {
+  const navigate = useNavigate();
+  const { unsolvedPuzzles } = usePuzzleStore();
+
+  useEffect(() => {
+    if (unsolvedPuzzles.size === 0) {
+      navigate("/");
+      return;
+    }
+
+    const unsolvedArray = Array.from(unsolvedPuzzles);
+    const randomIndex = Math.floor(Math.random() * unsolvedArray.length);
+    const randomId = unsolvedArray[randomIndex];
+
+    navigate(`/puzzles/${randomId}`);
+  }, [navigate, unsolvedPuzzles]);
+
+  return null;
+};
+
+
+# vite-env.d.ts
+/// <reference types="vite/client" />
+
+
+# assets\Icons\CheckmarkIcon.tsx
+import React from "react";
+
+type CheckmarkIconProps = {
+  width?: number;
+  height?: number;
+  stroke?: string;
+};
+
+const CheckmarkIcon: React.FC<CheckmarkIconProps> = ({
+  width = 24,
+  height = 24,
+  stroke = "white",
+}) => (
+  <svg viewBox="0 0 24 24" width={width} height={height}>
+    <path
+      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+      stroke={stroke}
+      fill="none"
+      strokeWidth="2"
+    />
+  </svg>
+);
+
+export default CheckmarkIcon;
+
+
+# assets\Icons\HintIcon.tsx
+import React from "react";
+
+type HintIconProps = {
+  width?: number;
+  height?: number;
+};
+
+const HintIcon: React.FC<HintIconProps> = ({ width = 16, height = 16 }) => (
+  <svg viewBox="0 0 24 24" width={width} height={height}>
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
+  </svg>
+);
+
+export default HintIcon;
+
+
+# assets\Icons\index.ts
+export { default as PreviousIcon } from "./PreviousIcon";
+export { default as NextIcon } from "./NextIcon";
+export { default as ResetIcon } from "./ResetIcon";
+export { default as HintIcon } from "./HintIcon";
+export { default as PlayIcon } from "./PlayIcon";
+
+
+# assets\Icons\NextIcon.tsx
+import React from "react";
+
+type NextIconProps = {
+  width?: number;
+  height?: number;
+};
+
+const NextIcon: React.FC<NextIconProps> = ({ width = 16, height = 16 }) => (
+  <svg viewBox="0 0 24 24" width={width} height={height}>
+    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+  </svg>
+);
+
+export default NextIcon;
+
+
+# assets\Icons\PlayIcon.tsx
+const PlayIcon = () => (
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+    <path d="M8 5v14l11-7z" />
+  </svg>
+);
+
+export default PlayIcon;
+
+
+# assets\Icons\PreviousIcon.tsx
+import React from "react";
+
+type PreviousIconProps = {
+  width?: number;
+  height?: number;
+};
+
+const PreviousIcon: React.FC<PreviousIconProps> = ({
+  width = 16,
+  height = 16,
+}) => (
+  <svg viewBox="0 0 24 24" width={width} height={height}>
+    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+  </svg>
+);
+
+export default PreviousIcon;
+
+
+# assets\Icons\QueenIcon.tsx
+import React from "react";
+
+type QueenIconProps = {
+  width?: number;
+  height?: number;
+  color?: "white" | "black";
+};
+
+const QueenIcon: React.FC<QueenIconProps> = ({
+  width = 16,
+  height = 16,
+  color = "black",
+}) => (
+  <svg
+    viewBox="0 0 45 45"
+    width={width}
+    height={height}
+    fill={color === "white" ? "white" : "black"}
+    stroke={color === "white" ? "black" : "white"}
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M 9,26 C 17.5,24.5 30,24.5 36,26 L 38.5,13.5 L 31,25 L 30.7,10.9 L 25.5,24.5 L 22.5,10 L 19.5,24.5 L 14.3,10.9 L 14,25 L 6.5,13.5 L 9,26 z" />
+    <path d="M 9,26 C 9,28 10.5,28 11.5,30 C 12.5,31.5 12.5,31 12,33.5 C 10.5,34.5 11,36 11,36 C 9.5,37.5 11,38.5 11,38.5 C 17.5,39.5 27.5,39.5 34,38.5 C 34,38.5 35.5,37.5 34,36 C 34,36 34.5,34.5 33,33.5 C 32.5,31 32.5,31.5 33.5,30 C 34.5,28 36,28 36,26 C 27.5,24.5 17.5,24.5 9,26 z" />
+    <path d="M 11.5,30 C 15,29 30,29 33.5,30" fill="none" />
+    <path d="M 12,33.5 C 18,32.5 27,32.5 33,33.5" fill="none" />
+    <circle cx="6" cy="12" r="2" />
+    <circle cx="14" cy="9" r="2" />
+    <circle cx="22.5" cy="8" r="2" />
+    <circle cx="31" cy="9" r="2" />
+    <circle cx="39" cy="12" r="2" />
+  </svg>
+);
+
+export default QueenIcon;
+
+
+# assets\Icons\ResetIcon.tsx
+import React from "react";
+
+type ResetIconProps = {
+  width?: number;
+  height?: number;
+};
+
+const ResetIcon: React.FC<ResetIconProps> = ({ width = 16, height = 16 }) => (
+  <svg viewBox="0 0 24 24" width={width} height={height}>
+    <path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+  </svg>
+);
+
+export default ResetIcon;
+
+
+# components\PuzzleComponent\PuzzleActions.tsx
+import React from "react";
+import { ChessPuzzle } from "@react-chess-tools/react-chess-puzzle";
+import { ResetIcon, HintIcon, PlayIcon } from "../../assets/Icons";
+
+type PuzzleActionsProps = {
+  sequenceState: {
+    isPlaying: boolean;
+    isShowing: boolean;
+    hasSequence: boolean;
+  };
+  handlers: {
+    onReset: () => void;
+    onPlaySequence: () => void;
+  };
+  isSolved: boolean;
+};
+
+const PuzzleActions: React.FC<PuzzleActionsProps> = ({
+  sequenceState,
+  handlers,
+  isSolved,
+}) => {
+  const { isPlaying, isShowing, hasSequence } = sequenceState;
+  const { onReset, onPlaySequence } = handlers;
+
+  return (
+    <div className="puzzle-actions">
+      <ChessPuzzle.Reset asChild onReset={onReset}>
+        <button className="action-button" disabled={isPlaying}>
+          <ResetIcon /> Reset
+        </button>
+      </ChessPuzzle.Reset>
+      <ChessPuzzle.Hint asChild>
+        <button className="action-button" disabled={isShowing || isPlaying}>
+          <HintIcon /> Hint
+        </button>
+      </ChessPuzzle.Hint>
+      {isSolved && hasSequence && !isShowing && (
+        <button
+          className="action-button"
+          onClick={onPlaySequence}
+          disabled={isPlaying}
+        >
+          <PlayIcon /> {isPlaying ? "Playing..." : "Play Sequence"}
+        </button>
+      )}
+    </div>
+  );
+};
+
+export default PuzzleActions;
+
+
+# components\PuzzleComponent\PuzzleComponent.tsx
+import React, { useEffect, useState } from "react";
+import PuzzleInstructions from "./PuzzleInstructions";
+import PuzzleNavigation from "./PuzzleNavigation";
+import PuzzleContent from "./PuzzleContent";
+import { usePuzzleStore } from "../../stores/puzzleStore";
+import { Puzzle } from "../../Puzzle";
+import SolutionMessage from "../SolutionMessage/SolutionMessage";
+
+type PuzzleComponentProps = {
+  puzzle: Puzzle;
+  onSolve: () => void;
+};
+
+const PuzzleComponent: React.FC<PuzzleComponentProps> = ({
+  puzzle,
+  onSolve,
+}) => {
+  const [resetKey, setResetKey] = useState(0);
+  const [isSolved, setIsSolved] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const { solvePuzzle } = usePuzzleStore();
+
+  useEffect(() => {
+    if (isSolved) {
+      solvePuzzle(puzzle.id);
+      onSolve();
+    }
+  }, [isSolved, puzzle.id, solvePuzzle, onSolve]);
+
+  return (
+    <div className="puzzle-component">
+      <div className="puzzle-container">
+        <PuzzleContent
+          puzzle={puzzle}
+          resetKey={resetKey}
+          isSolved={isSolved}
+          setIsSolved={setIsSolved}
+          setResetKey={setResetKey}
+          setAttempts={setAttempts}
+        />
+        <div className="puzzle-sidebar">
+          {isSolved ? (
+            <SolutionMessage description={puzzle.description} />
+          ) : (
+            <PuzzleInstructions puzzle={puzzle} />
+          )}
+          <PuzzleNavigation
+            puzzle={puzzle}
+            isSolved={isSolved}
+            attempts={attempts}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PuzzleComponent;
+
+
+# components\PuzzleComponent\PuzzleContent.tsx
+import React, { useState } from "react";
+import { ChessPuzzle } from "@react-chess-tools/react-chess-puzzle";
+import { Chessboard } from "react-chessboard";
+import { Chess } from "chess.js";
+import { Puzzle } from "../../Puzzle";
+import PuzzleActions from "./PuzzleActions";
+
+type PuzzleContentProps = {
+  puzzle: Puzzle;
+  resetKey: number;
+  isSolved: boolean;
+  setIsSolved: (solved: boolean) => void;
+  setResetKey: (fn: (prev: number) => number) => void;
+  setAttempts: (fn: (prev: number) => number) => void;
+};
+
+const PuzzleContent: React.FC<PuzzleContentProps> = ({
+  puzzle,
+  resetKey,
+  isSolved,
+  setIsSolved,
+  setResetKey,
+  setAttempts,
+}) => {
+  const [isPlayingSequence, setIsPlayingSequence] = useState(false);
+  const [sequenceGame, setSequenceGame] = useState<Chess | null>(null);
+  const [showingSequence, setShowingSequence] = useState(false);
+
+  const shouldFlipBoard = (fen: string): boolean => fen.split(" ")[1] === "b";
+
+  const handleReset = () => {
+    setResetKey((prev) => prev + 1);
+    setIsSolved(false);
+    setAttempts((prev) => prev + 1);
+    setIsPlayingSequence(false);
+    setSequenceGame(null);
+    setShowingSequence(false);
+  };
+
+  const playSequence = async () => {
+    if (isPlayingSequence) return;
+    setIsPlayingSequence(true);
+    setShowingSequence(true);
+    const game = new Chess(puzzle.fen);
+    setSequenceGame(game);
+    const moves = [...(puzzle.moves || []), ...(puzzle.move_sequence || [])];
+    for (const move of moves) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      game.move(move);
+      setSequenceGame(new Chess(game.fen()));
+    }
+    setIsPlayingSequence(false);
+  };
+
+  const sequenceState = {
+    isPlaying: isPlayingSequence,
+    isShowing: showingSequence,
+    hasSequence: !!(puzzle.move_sequence || puzzle.moves),
+  };
+
+  return (
+    <div className="puzzle-content">
+      <ChessPuzzle.Root
+        key={`${puzzle.id}-${resetKey}`}
+        puzzle={puzzle}
+        onSolve={() => setIsSolved(true)}
+      >
+        <PuzzleActions
+          sequenceState={sequenceState}
+          handlers={{ onReset: handleReset, onPlaySequence: playSequence }}
+          isSolved={isSolved}
+        />
+        <div className="board-container">
+          {showingSequence && sequenceGame ? (
+            <Chessboard
+              position={sequenceGame.fen()}
+              boardOrientation={shouldFlipBoard(puzzle.fen) ? "black" : "white"}
+            />
+          ) : (
+            <ChessPuzzle.Board />
+          )}
+        </div>
+      </ChessPuzzle.Root>
+    </div>
+  );
+};
+
+export default PuzzleContent;
+
+
+# components\PuzzleComponent\PuzzleInstructions.tsx
+import React from "react";
+import { Puzzle } from "../../Puzzle";
+import QueenIcon from "../../assets/Icons/QueenIcon";
+
+type PuzzleInstructionsProps = {
+  puzzle: Puzzle;
+};
+
+const PuzzleInstructions: React.FC<PuzzleInstructionsProps> = ({ puzzle }) => {
+  const activeColor = puzzle.fen.split(" ")[1];
+  const whoseMove = activeColor === "w" ? "White" : "Black";
+
+  return (
+    <div className="puzzle-instructions">
+      <div className="instructions-container">
+        <div className="instructions-content">
+          <span className="instructions-text">
+            <QueenIcon
+              width={24}
+              height={24}
+              color={activeColor === "w" ? "white" : "black"}
+            />{" "}
+            Your turn.
+            <br />
+            Find the <span className="instructions-text-worst">worst</span> move
+            for {whoseMove.toLowerCase()}.
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PuzzleInstructions;
+
+
+# components\PuzzleComponent\PuzzleNavigation.tsx
+import React, { useEffect } from "react";
+import { NextIcon } from "../../assets/Icons";
+import { useNavigate } from "react-router-dom";
+import { usePuzzleStore } from "../../stores/puzzleStore";
+import { Puzzle } from "../../Puzzle";
+
+type PuzzleNavigationProps = {
+  puzzle: Puzzle;
+  isSolved: boolean;
+  attempts: number;
+};
+
+const PuzzleNavigation: React.FC<PuzzleNavigationProps> = ({
+  puzzle,
+  isSolved,
+  attempts,
+}) => {
+  const { solvedPuzzles, unsolvedPuzzles, solvePuzzle } = usePuzzleStore();
+  const navigate = useNavigate();
+
+  // Automatically move solved puzzles from unsolved to solved
+  useEffect(() => {
+    if (isSolved && !solvedPuzzles.includes(puzzle.id)) {
+      solvePuzzle(puzzle.id); // Use the correct action name from your store
+    }
+  }, [isSolved, puzzle.id, solvedPuzzles, solvePuzzle]);
+
+  const handleNext = () => {
+    navigate("/puzzles/");
+  };
+
+  return (
+    <div className="puzzle-navigation">
+      <div className="puzzle-info">
+        <h3>Puzzle #{puzzle.id}</h3>
+        <div className="puzzle-stats">
+          <span>
+            Solved: {solvedPuzzles.length}/
+            {solvedPuzzles.length + unsolvedPuzzles.size}
+          </span>
+          <span> Attempts: {attempts}</span>
+        </div>
+      </div>
+      <div className="puzzle-controls">
+        {unsolvedPuzzles.size > 0 && (
+          <button
+            className="control-button"
+            onClick={handleNext}
+            disabled={!isSolved}
+          >
+            Next <NextIcon />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default PuzzleNavigation;
+
+
+# components\SolutionMessage\SolutionMessage.tsx
+import React from "react";
+import CheckmarkIcon from "../../assets/Icons/CheckmarkIcon";
+
+type SolutionMessageProps = {
+  description: string;
+};
+
+const SolutionMessage: React.FC<SolutionMessageProps> = ({ description }) => (
+  <div className="solution-message">
+    <div className="solution-header">
+      <div className="solution-icon">
+        <CheckmarkIcon width={20} height={20} />
+      </div>
+      <span className="solution-title">Puzzle Solved!</span>
+    </div>
+    <span className="solution-description">{description}</span>
+  </div>
+);
+
+export default SolutionMessage;
+
+
+# data\puzzles.json
+[
+  {
+    "id": "000hf",
+    "fen": "r1bqk2r/pp1nbNp1/2p1p2p/8/2BP4/1PN3P1/P3QP1P/3R1RK1 b kq - 0 19",
+    "moves": ["e8f7"],
+    "makeFirstMove": false,
+    "move_sequence": ["e2e6", "f7f8", "e6f7"],
+    "description": "Moving the king leads to a mate in 2."
+  },
+  {
+    "id": "000qP",
+    "fen": "8/7R/8/5p2/4bk1P/8/2r2K2/6R1 w - - 7 51",
+    "moves": ["f2f1"],
+    "makeFirstMove": false,
+    "move_sequence": ["f4f3", "f1e1", "c2c1", "e1d2", "c1g1"],
+    "description": "Moving the king allows Black to gain a decisive advantage."
+  },
+  {
+    "id": "0018S",
+    "fen": "2kr3r/pp3p2/4p2p/1N1p2p1/3Q4/1P1P4/2q2PPP/5RK1 b - - 1 20",
+    "moves": ["c2c1"],
+    "makeFirstMove": false,
+    "move_sequence": ["f1c1", "c8d7", "c1c7", "d7e8", "d4h8"],
+    "description": "Moving the queen leads to a mate in 3."
+  },
+  {
+    "id": "001h8",
+    "fen": "2r3k1/2r4p/4p1p1/1p1q1pP1/p1bP1P1Q/P6R/5B2/2R3K1 b - - 5 34",
+    "moves": ["c7c5"],
+    "makeFirstMove": false,
+    "move_sequence": ["h4h7", "g8f8", "h7h8", "f8e7", "h3h7"],
+    "description": "Moving the rook allows White to launch a decisive attack."
+  },
+  {
+    "id": "001u3",
+    "fen": "2r3k1/p1q2pp1/Q3p2p/b1Np4/2nP1P2/4P1P1/5K1P/2B1N3 b - - 3 33",
+    "moves": ["c7e5"],
+    "makeFirstMove": false,
+    "move_sequence": ["a6c8", "g8h7", "d4e5", "c4b6", "c8a6"],
+    "description": "Moving the queen allows White to gain a winning advantage."
+  },
+  {
+    "id": "001xl",
+    "fen": "8/4R1k1/p5pp/3B4/5q2/8/5P1P/6K1 b - - 5 40",
+    "moves": ["f4f7"],
+    "makeFirstMove": false,
+    "move_sequence": ["e7f7", "g7h8", "f7b7", "g6g5", "g1g2"],
+    "description": "Taking the rook leads to a losing endgame."
+  },
+  {
+    "id": "002Cw",
+    "fen": "r7/2p2r1k/p2p1q1p/Pp1P4/1P2P3/2PQ4/6R1/R5K1 b - - 2 28",
+    "moves": ["f6h8"],
+    "makeFirstMove": false,
+    "move_sequence": ["e4e5", "f7f5", "d3f5"],
+    "description": "Moving the queen allows a mate in 2."
+  },
+  {
+    "id": "002Uy",
+    "fen": "8/8/1p6/k7/P1R5/1K5r/8/8 w - - 26 64",
+    "moves": ["c4c3"],
+    "makeFirstMove": false,
+    "move_sequence": ["h3c3", "b3c3", "a5a4", "c3c2", "a4a3"],
+    "description": "Moving the rook allows Black to win the endgame."
+  },
+  {
+    "id": "002rd",
+    "fen": "r6k/q1pb1p1p/1b3Pr1/p1ppP2Q/3P2p1/4B3/PP2NRPP/3R2K1 b - - 1 25",
+    "moves": ["g6g7"],
+    "makeFirstMove": false,
+    "move_sequence": ["f6g7", "h8g7", "f2f7", "g7h8", "h5h7"],
+    "description": "Moving the rook leads to a mate in 3."
+  },
+  {
+    "id": "003eP",
+    "fen": "8/r1b1q2k/2p3p1/2Pp4/1P2p1n1/2B1P3/NQ6/2K4R b - - 1 36",
+    "moves": ["e7h4"],
+    "makeFirstMove": false,
+    "move_sequence": ["h1h4", "h7g8", "h4g4", "d5d4", "b2b3"],
+    "description": "Moving the queen allows White to gain a decisive advantage."
+  },
+  {
+    "id": "003jH",
+    "fen": "rn3rk1/p5pp/3N4/4np1q/5Q2/1P3K2/PB1P2P1/2R4R w - - 0 25",
+    "moves": ["f3f2"],
+    "makeFirstMove": false,
+    "move_sequence": ["e5d3", "f2g1", "d3f4", "h1h5", "f4h5"],
+    "description": "Moving the king allows a devastating knight fork."
+  },
+  {
+    "id": "0042j",
+    "fen": "3r2k1/4nppp/pq1p1b2/1p2P3/2r2P2/2P1NR2/PP1Q2BP/3R2K1 b - - 0 24",
+    "moves": ["d6e5"],
+    "makeFirstMove": false,
+    "move_sequence": ["d2d8", "b6d8", "d1d8"],
+    "description": "Taking the pawn leads to a quick mate in 2."
+  },
+  {
+    "id": "004Ax",
+    "fen": "8/8/4R1kp/p7/5rPK/8/7P/8 b - - 2 42",
+    "moves": ["g6f7"],
+    "makeFirstMove": false,
+    "move_sequence": ["e6h6", "f4d4", "h6a6", "d4d8", "a6a5"],
+    "description": "Moving the king allows White to dominate with the rook."
+  },
+  {
+    "id": "004RF",
+    "fen": "5rk1/5ppp/1p6/1qp2P1Q/3p3P/6R1/6PK/8 b - - 0 30",
+    "moves": ["g7g5"],
+    "makeFirstMove": false,
+    "move_sequence": ["h5g5", "g8h8", "g5f6"],
+    "description": "Opening the g-file leads to a quick mate in 2."
+  },
+  {
+    "id": "005f3",
+    "fen": "r5k1/2p1pp2/pp4p1/1q1r4/5P2/2QP2R1/PP6/1K4R1 b - - 0 32",
+    "moves": ["g8f8"],
+    "makeFirstMove": false,
+    "move_sequence": ["c3h8"],
+    "description": "Moving the king allows an immediate mate with the queen."
+  },
+  {
+    "id": "005nD",
+    "fen": "3rk2r/2qn1pp1/p1Q1R3/3n3p/8/8/PP4PP/5R1K b k - 0 23",
+    "moves": ["f7e6"],
+    "makeFirstMove": false,
+    "move_sequence": ["c6e6", "d5e7", "e6f7"],
+    "description": "Taking the pawn leads to a mate in 2 with the queen."
+  },
+  {
+    "id": "009uB",
+    "fen": "3br2r/5k1p/4p1pQ/P5P1/1B5P/P6q/5R2/6K1 b - - 1 35",
+    "moves": ["f7g8"],
+    "makeFirstMove": false,
+    "move_sequence": ["f2f8", "e8f8", "h6f8"],
+    "description": "King seeks shelter in the corner, finds a mating net instead."
+  },
+  {
+    "id": "00AGs",
+    "fen": "rn2k2Q/5p2/2p1p1r1/1q4p1/8/8/4NPPP/3R1K1R b q - 5 23",
+    "moves": ["e8e7"],
+    "makeFirstMove": false,
+    "move_sequence": ["h8d8"],
+    "description": "King takes a casual stroll, walks right into checkmate!"
+  },
+  {
+    "id": "00Ac7",
+    "fen": "8/2p1pk1p/Pp4p1/8/p1P2P2/3r2P1/3PR2P/3K4 b - - 1 33",
+    "moves": ["d3d2"],
+    "makeFirstMove": false,
+    "move_sequence": ["e2d2", "c7c6", "a6a7", "h7h5", "a7a8q"],
+    "description": "Rook captures with pride, pawn promotes with prejudice!"
+  },
+  {
+    "id": "00AoZ",
+    "fen": "8/1R6/p1pk4/6bp/1QP5/P7/KP6/3r2q1 b - - 2 44",
+    "moves": ["g1c5"],
+    "makeFirstMove": false,
+    "move_sequence": ["b7d7", "d6d7", "b4c5", "g5d8", "c5h5"],
+    "description": "Queen goes shopping on c5, ends up paying with position."
+  },
+  {
+    "id": "00Bg4",
+    "fen": "3r2k1/1q3ppp/p2rp3/Qp1B4/7P/P4P2/1PP3P1/1K1R3R b - - 0 21",
+    "moves": ["d6c6"],
+    "makeFirstMove": false,
+    "move_sequence": ["a5d8"],
+    "description": "Rook slides to c6, queen delivers instant checkmate!"
+  },
+  {
+    "id": "00CBU",
+    "fen": "8/2pR2kp/pb4p1/8/5p1P/B6K/P1r5/6r1 b - - 3 39",
+    "moves": ["g7h6"],
+    "makeFirstMove": false,
+    "move_sequence": ["a3f8", "h6h5", "d7h7"],
+    "description": "King flees to h6, bishop and rook say 'checkmate'!"
+  },
+  {
+    "id": "006XF",
+    "fen": "r5kr/pp1qb1p1/2p4p/3pPb1Q/3P4/2P1B3/PP4PP/R4RK1 b - - 1 17",
+    "moves": ["f5h7"],
+    "makeFirstMove": false,
+    "move_sequence": ["h5f7"],
+    "description": "Bishop to h7? More like 'Goodbye queen, hello checkmate!'"
+  },
+  {
+    "id": "006eO",
+    "fen": "8/8/2p2k2/1p1p4/3P4/1PP1pK2/8/8 b - - 3 64",
+    "moves": ["c6c5"],
+    "makeFirstMove": false,
+    "move_sequence": ["d4c5", "f6e5", "f3e3", "d5d4", "c3d4"],
+    "description": "Pawn advances boldly, White's pawns roll through mercilessly!"
+  },
+  {
+    "id": "006yP",
+    "fen": "6R1/8/Kpk1p3/1p1pP3/6P1/PPP1r3/8/8 b - - 3 40",
+    "moves": ["c6c5"],
+    "makeFirstMove": false,
+    "move_sequence": ["g8c8"],
+    "description": "One pawn move, one rook slide, instant checkmate!"
+  },
+  {
+    "id": "00761",
+    "fen": "3r2k1/1b3pbR/p2P2P1/3p2N1/2p5/2P2N2/PP6/2K5 b - - 0 28",
+    "moves": ["g7f8"],
+    "makeFirstMove": false,
+    "move_sequence": ["g6f7"],
+    "description": "Bishop retreats to f8, pawn delivers the final blow!"
+  },
+  {
+    "id": "0078T",
+    "fen": "rk5r/1b3R2/pp2p2q/4P2p/B2p3B/4R2P/PP4P1/5Q1K b - - 0 27",
+    "moves": ["b8c8"],
+    "makeFirstMove": false,
+    "move_sequence": ["f1c4", "b7c6", "c4c6", "c8b8", "f7b7"],
+    "description": "King slides to c8, White's pieces coordinate for mate!"
+  },
+  {
+    "id": "007AS",
+    "fen": "r3kb1r/3nnpp1/4p1bp/1NppP3/3P4/6N1/P2BBPPP/R3K2R b KQkq - 0 17",
+    "moves": ["a8d8"],
+    "makeFirstMove": false,
+    "move_sequence": ["b5d6"],
+    "description": "Rook relocates to d8, knight says 'Checkmate!'"
+  },
+  {
+    "id": "007ku",
+    "fen": "r1bq3Q/1np2kp1/p5B1/1p1Pp3/1Pn2BP1/2b2P2/P3K3/R4N2 b - - 5 35",
+    "moves": ["f7g6"],
+    "makeFirstMove": false,
+    "move_sequence": ["h8h5", "g6f6", "f4g5"],
+    "description": "King flees to g6, queen and bishop team up for mate!"
+  },
+  {
+    "id": "008GK",
+    "fen": "1k1r4/ppp3p1/8/1P5p/8/P3n2P/2P1r1P1/B3NRK1 b - - 4 31",
+    "moves": ["d8f8"],
+    "makeFirstMove": false,
+    "move_sequence": ["f1f8"],
+    "description": "Rook to f8? White's rook says 'Thanks for the mate!'"
+  },
+  {
+    "id": "008lc",
+    "fen": "7k/pb1qn2n/1p2R2Q/2p2p2/2Pp4/3B4/PP3PrP/4RK2 b - - 1 27",
+    "moves": ["f5f4"],
+    "makeFirstMove": false,
+    "move_sequence": ["h6h7"],
+    "description": "Pawn push to f4, queen delivers instant mate on h7!"
+  },
+  {
+    "id": "008o6",
+    "fen": "Q5k1/p1p3p1/5rP1/8/3P4/7P/q3r3/B4RK1 b - - 1 34",
+    "moves": ["f6f8"],
+    "makeFirstMove": false,
+    "move_sequence": ["f1f8"],
+    "description": "Rook blocks on f8, White's rook claims the game!"
+  },
+  {
+    "id": "008oX",
+    "fen": "4r1k1/2R3pp/2p4q/1p1p4/3P4/P7/1PP2R2/1K1N4 b - - 3 32",
+    "moves": ["e8c8"],
+    "makeFirstMove": false,
+    "move_sequence": ["c7c8"],
+    "description": "Rook captures rook, but it's actually a self-mate!"
+  },
+  {
+    "id": "0092z",
+    "fen": "2r3k1/2qR1ppp/p7/2p2Q2/P7/7P/5PP1/6K1 b - - 3 26",
+    "moves": ["g8f8"],
+    "makeFirstMove": false,
+    "move_sequence": ["f5f7"],
+    "description": "King steps to f8, queen delivers the finishing touch!"
+  },
+  {
+    "id": "009IO",
+    "fen": "3rk3/5p1r/p2Np1p1/3bP3/P2n4/8/1P3RPP/5RK1 b - - 4 25",
+    "moves": ["e8e7"],
+    "makeFirstMove": false,
+    "move_sequence": ["f2f7", "h7f7", "f1f7"],
+    "description": "King escapes to e7, but the rooks have other ideas!"
+  },
+  {
+    "id": "009bR",
+    "fen": "4r2k/3q2r1/1p4pQ/p1pP4/2P4P/1N4p1/PP3RK1/8 b - - 1 37",
+    "moves": ["g7h7"],
+    "makeFirstMove": false,
+    "move_sequence": ["f2f8", "e8f8", "h6f8"],
+    "description": "Rook retreats to h7, White's rook and queen seal the deal!"
+  }
+]
+
+
+# stores\puzzleStore.ts
+import { create } from "zustand";
+import puzzles from "../data/puzzles.json";
+
+interface PuzzleState {
+  unsolvedPuzzles: Set<string>;
+  solvedPuzzles: string[];
+  solvePuzzle: (puzzleId: string) => void;
+}
+
+export const usePuzzleStore = create<PuzzleState>((set) => ({
+  unsolvedPuzzles: new Set(puzzles.map((p) => p.id)),
+  solvedPuzzles: [],
+  solvePuzzle: (puzzleId) =>
+    set((state) => {
+      if (!state.unsolvedPuzzles.has(puzzleId)) return state;
+
+      const newUnsolved = new Set(state.unsolvedPuzzles);
+      newUnsolved.delete(puzzleId);
+
+      return {
+        unsolvedPuzzles: newUnsolved,
+        solvedPuzzles: [...state.solvedPuzzles, puzzleId],
+      };
+    }),
+}));
+
+
+# views\AboutPage\AboutPage.css
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap");
+
+:root {
+  --primary-color: #2f343d;
+  --secondary-color: #ffffff;
+  --tertiary-color: #f8f9fa;
+  --accent-color: #2f343d;
+  --text-color: #4a4a4a;
+}
+
+/* Base animations */
+@keyframes epicFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes epicSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes textGlow {
+  from {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  to {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@keyframes epicPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Main styles */
+.content-container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem 1rem;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: epicFadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+.content-section {
+  background: var(--secondary-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.content-section:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.content-section h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: #5e5ec6;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.hook-text {
+  font-family: "Inter", sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  background: var(--tertiary-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: epicSlideIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  animation-delay: calc(var(--animation-order) * 0.2s);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #5e5ec6;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.challenge-text {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+  text-align: center;
+  margin: 3rem 0;
+  color: var(--accent-color);
+  position: relative;
+  animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+.beta-badge {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-left: 0.75rem;
+  animation: epicPulse 3s infinite;
+  vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content-section {
+    padding: 1.5rem;
+  }
+}
+
+
+# views\AboutPage\AboutPage.tsx
+import React from "react";
+import "./AboutPage.css";
+
+const AboutPage: React.FC = () => (
+  <div className="content-container">
+    <div className="content-section">
+      <h2>Chess Training Reimagined 🐱‍🏍</h2>
+      <p className="hook-text">
+        Traditional chess puzzles teach you to find the best moves.
+        <br />
+        <strong>We train you to recognize the worst ones.</strong>
+        <br />
+        Because preventing disasters is what separates good players from great
+        ones.
+      </p>
+
+      <div className="feature-grid">
+        <div
+          className="feature-card"
+          style={{ "--animation-order": 1 } as React.CSSProperties}
+        >
+          <h3>🕵️ Blunder Prevention</h3>
+          <p>
+            Develop your danger radar with puzzles focused on spotting hidden
+            threats and tactical oversights before they happen.
+          </p>
+        </div>
+
+        <div
+          className="feature-card"
+          style={{ "--animation-order": 2 } as React.CSSProperties}
+        >
+          <h3>🛡️ Practical Defense</h3>
+          <p>
+            Master the art of resilient positions - learn to maintain advantage
+            while neutralizing your opponent's counterplay.
+          </p>
+        </div>
+
+        <div
+          className="feature-card"
+          style={{ "--animation-order": 3 } as React.CSSProperties}
+        >
+          <h3>📉 Mistake Analysis</h3>
+          <p>
+            Our unique puzzle system helps you learn from common positional
+            errors that lead to gradual disadvantages.
+          </p>
+        </div>
+
+        <div
+          className="feature-card"
+          style={{ "--animation-order": 4 } as React.CSSProperties}
+        >
+          <h3>⏳ Time Pressure Drills</h3>
+          <p>
+            Specialized exercises to improve your quick decision-making under
+            tournament-like conditions.
+          </p>
+        </div>
+
+        <div
+          className="feature-card"
+          style={{ "--animation-order": 5 } as React.CSSProperties}
+        >
+          <h3>🧩 Pattern Recognition</h3>
+          <p>
+            Train your brain to instinctively avoid common tactical pitfalls
+            through repeated exposure to critical positions.
+          </p>
+        </div>
+
+        <div
+          className="feature-card"
+          style={{ "--animation-order": 6 } as React.CSSProperties}
+        >
+          <h3>🏁 Endgame Training</h3>
+          <p>
+            Master the subtle art of converting advantages without blundering in
+            chess's most delicate phase.
+          </p>
+        </div>
+      </div>
+
+      <div className="cta-section">
+        <p className="challenge-text">
+          Improving at chess isn't just about finding brilliant moves - it's
+          about eliminating and exploiting catastrophic ones.
+          <br />
+          Ready to strengthen your weakest links?
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
+export default AboutPage;
+
+
+# views\ContributePage\ContributePage.css
+.content-container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(50px) rotate(-5deg);
+  animation: epicEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes epicEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.content-section {
+  background: var(--secondary-color);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.3) 0%,
+      transparent 70%
+    );
+    transform: rotate(45deg);
+    transition: all 0.8s ease-out;
+    opacity: 0;
+  }
+
+  &:hover::before {
+    transform: rotate(45deg) translate(50%, 50%);
+    opacity: 1;
+  }
+}
+
+.feature-grid,
+.contribute-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.feature-card,
+.contribute-card {
+  background: var(--tertiary-color);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+  animation: epicPopIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(var(--animation-order) * 0.15s);
+
+  &:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@keyframes epicPopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.beta-badge {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+  animation: epicShake 3s infinite;
+}
+
+@keyframes epicShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px) rotate(-5deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px) rotate(5deg);
+  }
+}
+
+@keyframes epicRipple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+
+# views\ContributePage\ContributePage.tsx
+import React from "react";
+import "./ContributePage.css";
+
+const ContributePage: React.FC = () => (
+  <div className="content-container">
+    <div className="content-section">
+      <h2>Contribute</h2>
+      <div className="contribute-grid">
+        <div
+          className="contribute-card"
+          style={{ "--animation-order": 1 } as React.CSSProperties}
+        >
+          <h3>Submit Puzzles</h3>
+          <p>Share your tactical discoveries with our community.</p>
+          <button className="action-button">Submit</button>
+        </div>
+        <div
+          className="contribute-card"
+          style={{ "--animation-order": 2 } as React.CSSProperties}
+        >
+          <h3>Review Puzzles</h3>
+          <p>Help verify and improve submitted puzzles.</p>
+          <button className="action-button">Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export default ContributePage;
+
+
+# views\PuzzlePage\PuzzlePage.css
+.puzzle-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.puzzle-page h1 {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+
+# views\PuzzlePage\PuzzlePage.tsx
+import React from "react";
+import { useParams } from "react-router-dom";
+import PuzzleComponent from "../../components/PuzzleComponent/PuzzleComponent";
+import puzzles from "../../data/puzzles.json";
+import { usePuzzleStore } from "../../stores/puzzleStore";
+
+const PuzzlePage: React.FC = () => {
+  const { puzzleId } = useParams<{ puzzleId: string }>();
+  const { solvePuzzle } = usePuzzleStore();
+  const puzzle = puzzles.find((p) => p.id === puzzleId);
+
+  const handleSolve = () => {
+    if (puzzleId) solvePuzzle(puzzleId);
+  };
+
+  if (!puzzle) {
+    return <div>Puzzle not found</div>;
+  }
+
+  return <PuzzleComponent puzzle={puzzle} onSolve={handleSolve} />;
+};
+
+export default PuzzlePage;
+
+

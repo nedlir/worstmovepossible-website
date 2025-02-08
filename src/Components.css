@@ -39,6 +39,26 @@
     gap: 0.25rem;
     width: 100%;
 
+    .share-container {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #262421;
+      border-radius: 8px;
+    }
+
+    .share-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .share-container h3 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
+
     .puzzle-instructions,
     .puzzle-navigation {
       width: 100%;
