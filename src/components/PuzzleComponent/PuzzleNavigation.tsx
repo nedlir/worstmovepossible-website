@@ -38,7 +38,6 @@ const PuzzleNavigation: React.FC<PuzzleNavigationProps> = ({
             Solved: {solvedPuzzles.length}/
             {solvedPuzzles.length + unsolvedPuzzles.size}
           </span>
-          <span> Attempts: {attempts}</span>
         </div>
       </div>
       <div className="puzzle-controls">
