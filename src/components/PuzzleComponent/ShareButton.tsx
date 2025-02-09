@@ -1,4 +1,5 @@
 import React from "react";
+import "./share-button.css";
 
 interface ShareButtonProps {
   platform: string;

@@ -11,6 +11,7 @@ import {
   DiscordIcon,
 } from "../../assets/Icons";
 import ShareButton from "./ShareButton";
+import "./share.css";
 
 const Share: React.FC<{ puzzleId: string }> = ({ puzzleId }) => {
   const [isShareVisible, setIsShareVisible] = useState(false);
