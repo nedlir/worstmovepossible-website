@@ -17,25 +17,23 @@ const ContributePage: React.FC = () => {
   };
 
   return (
-    <div className="content-container">
-      <div className="content-section">
-        <h2>Contribute</h2>
+    <div className="content-section">
+      <div className="cta-header">
         <div className="contribute-grid">
           <div
             className="contribute-card"
             style={{ "--animation-order": 1 } as React.CSSProperties}
           >
-            <h3>⚡ Suggest New Puzzles</h3>
+            <h3>⚡ Architect New Puzzles</h3>
             <p>
-              Design devilish chess positions where the worst possible move is
-              challenging to find. Include clear justification for why the
-              proposed move is truly catastrophic.
+              Design positions where catastrophic moves hide in plain sight.
+              Include engine analysis proving the move's objective weakness.
             </p>
             <button
               className="action-button"
               onClick={() => handleContribution("submit")}
             >
-              Submit Worst Move Puzzle
+              Propose Puzzle Challenge
             </button>
           </div>
 
@@ -43,19 +41,27 @@ const ContributePage: React.FC = () => {
             className="contribute-card"
             style={{ "--animation-order": 2 } as React.CSSProperties}
           >
-            <h3>🚫 Report Puzzles</h3>
+            <h3>🚨 Quality Control Patrol</h3>
             <p>
-              Found a puzzle where the "worst move" doesn't make sense? Report
-              questionable positions, alternative solutions, or scoring
-              oddities. Help keep our puzzle quality brutally honest.
+              Flag puzzles where alternative solutions exist or the "worst move"
+              lacks catastrophic consequences. Be our accuracy watchdog.
             </p>
             <button
               className="action-button"
               onClick={() => handleContribution("report")}
             >
-              Report Puzzle Issue
+              Report Puzzle Anomaly
             </button>
           </div>
+        </div>
+        <div className="contribute-footer">
+          <p>
+            <em>
+              Every verified submission earns you a spot in our
+              <strong> Puzzle Hall of Fame</strong>
+            </em>{" "}
+            🏆
+          </p>
         </div>
       </div>
     </div>

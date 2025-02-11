@@ -51,11 +51,11 @@ const App: React.FC = () => {
           <Link to="/" onClick={closeMobileMenu} {...touchProps}>
             Puzzles
           </Link>
-          <Link to="/about" onClick={closeMobileMenu} {...touchProps}>
-            About
-          </Link>
           <Link to="/contribute" onClick={closeMobileMenu} {...touchProps}>
             Contribute
+          </Link>
+          <Link to="/about" onClick={closeMobileMenu} {...touchProps}>
+            About
           </Link>
         </div>
 

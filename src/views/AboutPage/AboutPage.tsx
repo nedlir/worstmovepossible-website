@@ -4,90 +4,76 @@ import "./AboutPage.css";
 const AboutPage: React.FC = () => (
   <div className="content-container">
     <div className="content-section">
-      <h2>Chess Training Reimagined 🐱‍🏍</h2>
-      <p className="hook-text">
-        Traditional chess puzzles teach you to find the best moves.
-        <br />
-        <strong>We train you to recognize the worst ones.</strong>
-        <br />
-        Because preventing disasters is what separates good players from great
-        ones.
-      </p>
-
-      <div className="feature-grid">
-        <div
-          className="feature-card"
-          style={{ "--animation-order": 1 } as React.CSSProperties}
-        >
-          <h3>🕵️ Blunder Prevention</h3>
-          <p>
-            Develop your danger radar with puzzles focused on spotting hidden
-            threats and tactical oversights before they happen.
-          </p>
-        </div>
-
-        <div
-          className="feature-card"
-          style={{ "--animation-order": 2 } as React.CSSProperties}
-        >
-          <h3>🛡️ Practical Defense</h3>
-          <p>
-            Master the art of resilient positions - learn to maintain advantage
-            while neutralizing your opponent's counterplay.
-          </p>
-        </div>
-
-        <div
-          className="feature-card"
-          style={{ "--animation-order": 3 } as React.CSSProperties}
-        >
-          <h3>📉 Mistake Analysis</h3>
-          <p>
-            Our unique puzzle system helps you learn from common positional
-            errors that lead to gradual disadvantages.
-          </p>
-        </div>
-
-        <div
-          className="feature-card"
-          style={{ "--animation-order": 4 } as React.CSSProperties}
-        >
-          <h3>⏳ Time Pressure Drills</h3>
-          <p>
-            Specialized exercises to improve your quick decision-making under
-            tournament-like conditions.
-          </p>
-        </div>
-
-        <div
-          className="feature-card"
-          style={{ "--animation-order": 5 } as React.CSSProperties}
-        >
-          <h3>🧩 Pattern Recognition</h3>
-          <p>
-            Train your brain to instinctively avoid common tactical pitfalls
-            through repeated exposure to critical positions.
-          </p>
-        </div>
-
-        <div
-          className="feature-card"
-          style={{ "--animation-order": 6 } as React.CSSProperties}
-        >
-          <h3>🏁 Endgame Training</h3>
-          <p>
-            Master the subtle art of converting advantages without blundering in
-            chess's most delicate phase.
-          </p>
-        </div>
+      <div className="header-section">
+        <p className="hook-text">
+          If you ask any player what is the worst move possible in any given
+          position, the answer, unsurprisingly would be "to resign the game".
+          But that is too trivial, and is not very creative. The project you see
+          in front of your eyes started as a joke, but as I begun developing it,
+          I realized it is more than a mere joke and actually has an educational
+          value. Traditional chess puzzles teach you to find the best moves
+          possible.
+          <strong>
+            {" "}
+            Worstmovepossible trains you to recognize the worst ones.
+          </strong>
+          <br />
+          Because knowing how to prevent disasters and how to exploit opponent's
+          blunder is what separates good players from great ones.
+        </p>
       </div>
 
-      <div className="cta-section">
-        <p className="challenge-text">
-          Improving at chess isn't just about finding brilliant moves - it's
-          about eliminating and exploiting catastrophic ones.
-          <br />
-          Ready to strengthen your weakest links?
+      <div className="challenge-text">
+        <p>Improving at chess isn't just about spotting brilliant moves - </p>
+        it's about identifying and capitalizing on the worst ones, can you turn
+        blunders into opportunities?
+      </div>
+
+      <div className="features-paragraph">
+        <h3>Why should I care?</h3>
+        <p>
+          Our approach to chess improvement focuses on developing your chess
+          intuition through pattern recognition and strategic awareness. Learn
+          to spot potential threats before they materialize, and maintain your
+          positional advantages while preventing counterplay opportunities.
+        </p>
+
+        <p>
+          Through careful analysis of common mistakes and practical exercises
+          under time pressure, you'll develop a deeper understanding of critical
+          positions.
+        </p>
+
+        <p>
+          Improve tactical awareness with strategic understanding. From
+          improving your threat detection to mastering blunder-prevention
+          techniques (AH! MY QUEEN!).
+        </p>
+
+        <p>
+          The journey to chess mastery is built on three fundamental pillars:
+          developing core chess fundamentals, honing analytical capabilities,
+          and strengthening threat awareness. I am hoping you'll build a robust
+          foundation that helps you maintain accuracy throughout your games and
+          develop the ability to capitalize on errors.
+        </p>
+
+        <h3>How did you create the puzzles?</h3>
+        <p>
+          The puzzles are generated by a custom-built engine that evaluates
+          positions based on the worst possible move. It leverages the power of{" "}
+          <a href="https://stockfishchess.org">Stockfish</a>, the world's
+          strongest open-source chess engine with an estimated Elo rating of
+          3500+, to analyze positions. The engine creates a minimax tree that
+          calculates the evaluation value of each move using the{" "}
+          <a href="https://en.wikipedia.org/wiki/Minimax">minimax algorithm</a>,
+          which helps determine optimal play by working backwards from the end
+          position. However, unlike traditional chess engines that seek the best
+          moves, our engine is specifically designed to identify the most
+          counterproductive moves in a given position and generate puzzles that
+          challenge users to find the best response. The engine's source code is
+          available as an open-source project on{" "}
+          <a href="https://github.com/nedlir">my GitHub</a>.
         </p>
       </div>
     </div>
