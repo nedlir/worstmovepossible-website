@@ -32,22 +32,6 @@
     "description": "Moving the rook allows White to launch a decisive attack."
   },
   {
-    "id": "001u3",
-    "fen": "2r3k1/p1q2pp1/Q3p2p/b1Np4/2nP1P2/4P1P1/5K1P/2B1N3 b - - 3 33",
-    "moves": ["c7e5"],
-    "makeFirstMove": false,
-    "move_sequence": ["a6c8", "g8h7", "d4e5", "c4b6", "c8a6"],
-    "description": "Moving the queen allows White to gain a winning advantage."
-  },
-  {
-    "id": "001xl",
-    "fen": "8/4R1k1/p5pp/3B4/5q2/8/5P1P/6K1 b - - 5 40",
-    "moves": ["f4f7"],
-    "makeFirstMove": false,
-    "move_sequence": ["e7f7", "g7h8", "f7b7", "g6g5", "g1g2"],
-    "description": "Taking the rook leads to a losing endgame."
-  },
-  {
     "id": "002Cw",
     "fen": "r7/2p2r1k/p2p1q1p/Pp1P4/1P2P3/2PQ4/6R1/R5K1 b - - 2 28",
     "moves": ["f6h8"],
@@ -72,14 +56,6 @@
     "description": "Moving the rook leads to a mate in 3."
   },
   {
-    "id": "003eP",
-    "fen": "8/r1b1q2k/2p3p1/2Pp4/1P2p1n1/2B1P3/NQ6/2K4R b - - 1 36",
-    "moves": ["e7h4"],
-    "makeFirstMove": false,
-    "move_sequence": ["h1h4", "h7g8", "h4g4", "d5d4", "b2b3"],
-    "description": "Moving the queen allows White to gain a decisive advantage."
-  },
-  {
     "id": "003jH",
     "fen": "rn3rk1/p5pp/3N4/4np1q/5Q2/1P3K2/PB1P2P1/2R4R w - - 0 25",
     "moves": ["f3f2"],
@@ -94,14 +70,6 @@
     "makeFirstMove": false,
     "move_sequence": ["d2d8", "b6d8", "d1d8"],
     "description": "Taking the pawn leads to a quick mate in 2."
-  },
-  {
-    "id": "004Ax",
-    "fen": "8/8/4R1kp/p7/5rPK/8/7P/8 b - - 2 42",
-    "moves": ["g6f7"],
-    "makeFirstMove": false,
-    "move_sequence": ["e6h6", "f4d4", "h6a6", "d4d8", "a6a5"],
-    "description": "Moving the king allows White to dominate with the rook."
   },
   {
     "id": "004RF",
@@ -246,14 +214,6 @@
     "makeFirstMove": false,
     "move_sequence": ["h6h7"],
     "description": "Pawn push to f4, queen delivers instant mate on h7!"
-  },
-  {
-    "id": "008o6",
-    "fen": "Q5k1/p1p3p1/5rP1/8/3P4/7P/q3r3/B4RK1 b - - 1 34",
-    "moves": ["f6f8"],
-    "makeFirstMove": false,
-    "move_sequence": ["f1f8"],
-    "description": "Rook blocks on f8, White's rook claims the game!"
   },
   {
     "id": "008oX",
