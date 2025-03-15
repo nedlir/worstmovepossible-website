@@ -13,7 +13,6 @@ type PuzzleNavigationProps = {
 const PuzzleNavigation: React.FC<PuzzleNavigationProps> = ({
   puzzle,
   isSolved,
-  attempts,
 }) => {
   const { solvedPuzzles, unsolvedPuzzles, solvePuzzle } = usePuzzleStore();
   const navigate = useNavigate();
