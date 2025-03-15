@@ -454,5 +454,13 @@
     "makeFirstMove": false,
     "move_sequence": ["f2f7"],
     "description": "King g8-f8? Clever girl... Queen f2-f7 pounces with a checkmate that'll leave you extinct faster than you can say 'clever girl.'"
+  },
+  {
+    "id": "00stLm",
+    "fen": "7k/5Q2/5K2/8/8/8/8/8 w - - 0 1",
+    "moves": ["f7h7"],
+    "makeFirstMove": false,
+    "move_sequence": ["h7h7"],
+    "description": "Queen f7-h7? Congratulations, you just dropped the mixtape of draws when checkmate was yours for the taking!"
   }
 ]
