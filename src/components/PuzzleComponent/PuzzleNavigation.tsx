@@ -28,7 +28,6 @@ const PuzzleNavigation: React.FC<PuzzleNavigationProps> = ({
   const handleNext = () => {
     navigate("/puzzles/");
   };
-  console.log(attempts);
 
   return (
     <div className="puzzle-navigation">
